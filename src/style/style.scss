@@ -1,0 +1,52 @@
+// COLORS
+
+// $primary: red;
+
+// CSS
+
+// PER IL FOOTER A BORDO PAGINA, AGIGUNGERE ANCHE FLEX-GROW-1 AL MAIN
+// html,
+// body,
+// #root {
+//   height: 100%;
+// }
+.navBack {
+  background-color: #1e1e1e;
+}
+
+.footer-icon {
+  color: #838383;
+}
+
+.footer-links {
+  font-size: 0.8em;
+}
+
+.footer-links p {
+  margin-bottom: 0.3em;
+  color: #838383;
+}
+
+.footer-links a {
+  color: #838383;
+  text-decoration: none;
+}
+
+.copyright {
+  color: #838383;
+  font-size: 0.8em;
+}
+
+footer {
+  background-color: #1e1e1e;
+}
+
+.spanbutton {
+  color: #838383;
+}
+
+#footerbutton {
+  border-color: #838383;
+}
+
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
