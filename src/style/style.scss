@@ -1,7 +1,7 @@
 // COLORS
 
-// $primary: red;
-
+$primary: #f14902;
+$info: #f6e7d8;
 // CSS
 
 // PER IL FOOTER A BORDO PAGINA, AGIGUNGERE ANCHE FLEX-GROW-1 AL MAIN
@@ -10,6 +10,15 @@
 // #root {
 //   height: 100%;
 // }
+.formGrap {
+  background-color: rgb(19, 18, 18);
+  box-shadow: 1px 0px 8px 5px #545453;
+}
+
+.pageBody {
+  background-color: #1e1e1e;
+}
+
 .navBack {
   background-color: #1e1e1e;
 }

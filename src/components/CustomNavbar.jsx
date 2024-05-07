@@ -69,7 +69,11 @@ function CustomNavbar() {
               CONTACTS
             </Link>
             <Link
-              className={location === '/login' ? 'nav-link active' : 'nav-link'}
+              className={
+                location === '/login' || location === '/register'
+                  ? 'nav-link active'
+                  : 'nav-link'
+              }
               to="/login"
             >
               <i className="bi bi-person-up"></i> LOGIN

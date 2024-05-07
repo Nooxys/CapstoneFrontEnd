@@ -3,16 +3,18 @@ import CustomNavbar from './components/CustomNavbar'
 import CustomFooter from './components/CustomFooter'
 import LoginPage from './components/LoginPage'
 import NotFound from './components/NotFound'
+import RegisterPage from './components/RegisterPage'
 function App() {
   return (
     <>
       <BrowserRouter>
-        <body>
+        <body className="pageBody">
           <header>
             <CustomNavbar />
           </header>
           <Routes>
             <Route element={<LoginPage />} path="login" />
+            <Route element={<RegisterPage />} path="register" />
             <Route element={<NotFound />} path="*" />
           </Routes>
           <footer>
