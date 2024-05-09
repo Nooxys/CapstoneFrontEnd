@@ -66,8 +66,8 @@ function CustomNavbar() {
             <Link className="nav-link" to="/about">
               ABOUT US
             </Link>
-            <Link className="nav-link" to="/">
-              CONTACTS
+            <Link className="nav-link" to="/contacts">
+              CONTACT
             </Link>
             <Link
               className={

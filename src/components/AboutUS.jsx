@@ -66,9 +66,8 @@ const AboutUs = () => {
               <h2 className="text-center fw-bold pt-4  pt-xl-0">
                 Opening Hours
               </h2>
-              <p className="text-center px-5 pt-4 pb-2 pb-lg-5 pb-xl-0 opacity-75">
+              <p className="text-center px-5 pt-4 pb-2 pb-lg-5 pb-xl-0 ">
                 <span className="d-block">
-                  {' '}
                   Monday to Friday: 8:00 am - 23.00 pm
                 </span>
                 <span className="d-block">Saturday: 8.00 am - 2.00 am</span>
