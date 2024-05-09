@@ -2,21 +2,45 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link } from 'react-router-dom'
+import logo from '../assets/man-reglogin.png'
 
 const LoginPage = () => {
   return (
     <Container>
+      <div className="position-relative z-2 ">
+        <h1 className="text-center text-primary py-5 display-3 fw-bold ">
+          SIGN IN
+        </h1>
+        <img
+          src={logo}
+          width={100}
+          alt="logo"
+          className="position-absolute top-0 start-50 translate-middle-x z-n1"
+        />
+      </div>
+      <div>
+        <hr className=" z-n1 position-relative z-1 " />
+      </div>
+
       <Row className="justify-content-center my-5">
-        <Col xs={10} md={6} lg={4} className="formGrap rounded-2  p-3 ">
-          <Form>
+        <Col xs={10} md={6} lg={4} className="formGrap p-5 mb-5">
+          <Form className="py-2">
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label className="text-white">Email</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Label className="text-white fw-bold">Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Noctfit@Noctfit.com"
+                className="rounded-0"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label className="text-white">Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Label className="text-white fw-bold">Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                className="rounded-0"
+              />
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -24,14 +48,18 @@ const LoginPage = () => {
             ></Form.Group>
             <Row className="justify-content-center">
               <Col xs={3}>
-                <Button variant="primary" type="submit" className="text-white">
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="text-white my-4 rounded-0 fw-bold"
+                >
                   LOGIN
                 </Button>
               </Col>
               <p className="text-center text-white pt-2">
-                Dont have an account yet?
+                Don&apos;t have an account yet?
                 <Link
-                  className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1"
+                  className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1 fw-bold"
                   to="/register"
                 >
                   Register here!

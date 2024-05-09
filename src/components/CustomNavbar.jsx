@@ -1,16 +1,17 @@
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import logo from '../assets/NOCTFITSTATIC.png'
+import logo from '../assets/NOCTFIT_final.png'
 import { Link, useLocation } from 'react-router-dom'
 
 function CustomNavbar() {
   const location = useLocation().pathname
   return (
     <Navbar
+      sticky="top"
       collapseOnSelect
       expand="lg"
-      className="bg-body-tertiary p-0"
+      className="bg-body-tertiary p-0 mb-5  "
       data-bs-theme="dark"
       bg="dark"
     >
@@ -18,7 +19,7 @@ function CustomNavbar() {
         <Link
           className={
             location === '/'
-              ? 'nav-link active d-lg-none '
+              ? 'nav-link active d-lg-none'
               : 'nav-link d-lg-none '
           }
           to="/"
@@ -62,7 +63,7 @@ function CustomNavbar() {
             >
               <img src={logo} width={300} alt="logo" />
             </Link>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/about">
               ABOUT US
             </Link>
             <Link className="nav-link" to="/">
