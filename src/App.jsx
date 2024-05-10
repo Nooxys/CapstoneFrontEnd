@@ -8,6 +8,7 @@ import Homepage from './components/Homepage'
 import AboutUs from './components/AboutUS'
 import Contact from './components/Contact'
 import Profile from './components/Profile'
+import ChangePassword from './components/ChangePassword'
 function App() {
   return (
     <>
@@ -24,6 +25,8 @@ function App() {
               <Route element={<AboutUs />} path="about" />
               <Route element={<Contact />} path="contacts" />
               <Route element={<Profile />} path="profile" />
+              <Route element={<ChangePassword />} path="password" />
+
               <Route element={<NotFound />} path="*" />
             </Routes>
             <footer>
