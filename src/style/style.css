@@ -8,10 +8,7 @@ body,
   justify-content: space-between;
 }
 
-@font-face {
-  font-family: "Montserrat";
-  src: url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-}
+@font-face {}
 .formGrap {
   background-color: rgb(19, 18, 18);
   box-shadow: 1px 0px 8px 5px #545453;

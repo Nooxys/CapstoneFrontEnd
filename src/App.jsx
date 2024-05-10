@@ -7,6 +7,7 @@ import RegisterPage from './components/RegisterPage'
 import Homepage from './components/Homepage'
 import AboutUs from './components/AboutUS'
 import Contact from './components/Contact'
+import Profile from './components/Profile'
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
               <Route element={<RegisterPage />} path="register" />
               <Route element={<AboutUs />} path="about" />
               <Route element={<Contact />} path="contacts" />
+              <Route element={<Profile />} path="profile" />
               <Route element={<NotFound />} path="*" />
             </Routes>
             <footer>
