@@ -30,7 +30,7 @@ const ChangePassword = () => {
               <Row className="justify-content-center">
                 <Button
                   variant="primary"
-                  className="text-white mt-4 rounded-0 fw-bold w-50 "
+                  className="text-white mt-4 rounded-0 fw-bold w-25 "
                 >
                   UPDATE
                 </Button>

@@ -67,7 +67,7 @@ const Contact = () => {
         <hr className="d-lg-none" />
         <Col xs={12} lg={6}>
           <h2 className="fw-bold mb-5  text-center mt-2 mt-lg-0 ">F.A.Q</h2>
-          <Accordion defaultActiveKey="0" className="px-5 pt-lg-4 ">
+          <Accordion className="px-5 pt-lg-4 ">
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 Is a medical certificate necessary to train?

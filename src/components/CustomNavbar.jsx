@@ -15,7 +15,7 @@ function CustomNavbar() {
       data-bs-theme="dark"
       bg="dark"
     >
-      <Container fluid className="navBack">
+      <Container fluid className="navBack p-0">
         <Link
           className={
             location === '/'

@@ -2,6 +2,7 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import athlete from '../assets/athlete_celebrating.png'
 import photo1 from '../assets/compress-strong-man-training-gym-min-scaled.webp'
 import photo2 from '../assets/bft-2.webp'
+import { Link } from 'react-router-dom'
 const AboutUs = () => {
   return (
     <Container className="mb-5">
@@ -23,10 +24,11 @@ const AboutUs = () => {
             to achieve goals never achieved before, with personalized fitness
             routes and nutritions plans. Our customers confirm it!
           </p>
-
-          <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">
-            CONTACT US <i className="bi bi-arrow-right"></i>
-          </Button>
+          <Link to={'/contacts'}>
+            <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">
+              CONTACT US <i className="bi bi-arrow-right"></i>
+            </Button>
+          </Link>
         </Col>
         <Col xs={10} md={5} className="d-none d-md-block mb-5">
           <img src={athlete} alt="athlete_celebrating" width={350} />
