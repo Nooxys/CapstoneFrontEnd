@@ -86,13 +86,13 @@ const Profile = () => {
             </Col>
             <div>
               <p className="fw-bold  mb-1 mt-5">change avatar</p>
+              <p className="fw-bold  my-1">update info</p>
               <Link
                 className="text-black link-underline link-underline-opacity-0"
                 to={'/password'}
               >
                 <p className="fw-bold  my-1">change password</p>
               </Link>
-
               <p className="fw-bold  mb-3">
                 LOGOUT <i className="bi bi-person-down"></i>
               </p>

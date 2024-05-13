@@ -28,7 +28,7 @@ function CustomNavbar() {
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto me-auto d-flex align-items-md-center ">
+          <Nav className="ms-auto me-auto d-flex align-items-lg-center ps-3 ps-lg-0 ">
             <Link
               className={location === '/' ? 'nav-link active' : 'nav-link'}
               to="/"
@@ -39,17 +39,15 @@ function CustomNavbar() {
               className={
                 location === '/subscriptions' ? 'nav-link active ' : 'nav-link'
               }
-              to="/"
+              to="/subscriptions"
             >
               SUBSCRIPTIONS
             </Link>
             <Link
               className={
-                location === '/personalTrainers'
-                  ? 'nav-link active '
-                  : 'nav-link'
+                location === '/trainers' ? 'nav-link active ' : 'nav-link'
               }
-              to="/"
+              to="/trainers"
             >
               TRAINERS
             </Link>

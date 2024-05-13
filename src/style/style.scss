@@ -96,4 +96,30 @@ footer {
   background-repeat: no-repeat;
 }
 
+.trainers {
+  background-image: url('../assets/trainer-bg.d8a91ceec330444b6dfd.png');
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 97%;
+}
+
+.underTrainers {
+  background-color: #f8f8f8;
+  box-shadow: 1px 4px 11px 0px #b5b5b5;
+}
+
+.subscriptions {
+  background-color: #0000004a;
+}
+
+.graytrain {
+  filter: grayscale(1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+
+.graytrain:hover {
+  filter: grayscale(0);
+}
+
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

@@ -1,7 +1,7 @@
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import athlete from '../assets/athlete_celebrating.png'
 import photo1 from '../assets/compress-strong-man-training-gym-min-scaled.webp'
-import photo2 from '../assets/bft-2.webp'
+import photo2 from '../assets/reunion.webp'
 import { Link } from 'react-router-dom'
 const AboutUs = () => {
   return (
@@ -13,7 +13,7 @@ const AboutUs = () => {
 
       <Row className="justify-content-center justify-content-md-around my-4">
         <Col xs={10} md={6}>
-          <h4 className="fw-bold mb-4 text-center text-md-start mt-5 mt-xl-0">
+          <h4 className="fw-bold mb-4 text-center text-md-start  mt-lg-5 mt-xl-0">
             NOCTFIT
           </h4>
           <h2 className="fw-bold mb-4  text-center text-md-start">
