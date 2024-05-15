@@ -8,14 +8,16 @@ function CustomNavbar() {
   const location = useLocation().pathname
   return (
     <Navbar
-      sticky="top"
       collapseOnSelect
       expand="lg"
-      className="bg-body-tertiary p-0 mb-5  "
+      className="bg-body-tertiary p-0"
       data-bs-theme="dark"
       bg="dark"
     >
-      <Container fluid className="navBack p-0">
+      <Container
+        fluid
+        className="navBack p-0 border-3 border-bottom border-primary "
+      >
         <Link
           className={
             location === '/'

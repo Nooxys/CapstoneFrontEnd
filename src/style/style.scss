@@ -2,6 +2,9 @@
 
 $primary: #ff0336;
 $info: #f6e7d8;
+$danger: #1e1e1e;
+$offwhite: darken(white, 10%);
+$darkblue: rgb(50, 50, 60);
 
 $position-values: (
   0: 0,
@@ -21,11 +24,15 @@ $position-values: (
 html,
 body,
 #root {
+  overflow-x: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
 }
+
 @font-face {
   // font-family: 'Montserrat';
   // src: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
@@ -33,7 +40,7 @@ body,
 
 .formGrap {
   background-color: rgb(19, 18, 18);
-  box-shadow: 1px 0px 8px 5px #545453;
+  // box-shadow: 1px 0px 8px 5px #545453;
 }
 
 hr {
@@ -85,17 +92,6 @@ footer {
   border-color: #838383;
 }
 
-.customButton::hover {
-  background-color: black;
-  color: white;
-}
-
-.prova {
-  background-image: url('../assets/bft-2.webp');
-  object-fit: contain;
-  background-repeat: no-repeat;
-}
-
 .trainers {
   background-image: url('../assets/trainer-bg.d8a91ceec330444b6dfd.png');
   position: relative;
@@ -110,6 +106,12 @@ footer {
 
 .subscriptions {
   background-color: #0000004a;
+  object-fit: cover;
+}
+
+.homeSub {
+  background-color: #0000004a;
+  object-fit: cover;
 }
 
 .graytrain {
@@ -120,6 +122,67 @@ footer {
 
 .graytrain:hover {
   filter: grayscale(0);
+}
+
+.hero {
+  background-image: url('../assets/pexels-anush-1229356.jpg');
+  background-position-y: 25%;
+
+  height: 110vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 110%;
+}
+
+.heroPng {
+  background-color: rgb(43, 43, 43);
+  transition: ease-in cubic-bezier(0.4, 0, 1, 1);
+  transition-duration: 0.2s;
+}
+
+.heroPng:hover {
+  background-color: $primary;
+}
+
+.col-homepage {
+  height: 80px;
+}
+
+.calculate-section {
+  background-image: url('../assets//confident-sportswoman-with-dumbbell-dark.jpg');
+  height: 80vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  background-position-y: 60%;
+  color: white;
+  form,
+  input,
+  label {
+    color: white !important;
+  }
+  .form-control::placeholder {
+    color: white;
+  }
+}
+
+.divreview {
+  background-color: black;
+  height: 22rem;
+  width: 100%;
+  overflow-x: clip;
+  opacity: 1;
+  position: relative;
+}
+
+.divouterrew {
+  border-color: rgb(239, 239, 239) !important;
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  border: solid;
+  border-width: 6px;
 }
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

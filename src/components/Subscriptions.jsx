@@ -6,12 +6,12 @@ const Subscriptions = () => {
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold mb-5"> SUBSCRIPTIONS </h1>
+        <h1 className="text-center fw-bold my-5"> SUBSCRIPTIONS </h1>
 
         <hr />
         <Row className="justify-content-center justify-content-md-around my-4">
           <Col xs={10} md={6}>
-            <h4 className="fw-bold mb-4 text-center text-md-start mt-lg-5">
+            <h4 className="fw-bold mb-4 text-center text-md-start mt-lg-5  ">
               For Every Need
             </h4>
             <h2 className="fw-bold mb-4  text-center text-md-start">
@@ -23,12 +23,12 @@ const Subscriptions = () => {
               package that best meets your needs!
             </p>
             <h4 className="fw-bold mb-4 text-center text-md-start mt-5 mt-xl-0">
-              Will A Trainer Follow Me?
+              You Are Not Alone
             </h4>
             <p className="mb-5 opacity-75 ">
-              absolutely yes! If you think you need an expert to guide you step
-              by step at every goal, check out our best personal trainers and
-              choose the one that&apos;s right for you!
+              If you need an expert to guide you step by step at every goal,
+              check out our best personal trainers and choose the one
+              that&apos;s right for you!
             </p>
             <Link to={'/trainers'}>
               <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">

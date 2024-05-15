@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 const RegisterPage = () => {
   return (
     <Container>
-      <div className="position-relative z-2  ">
-        <h1 className="text-center text-primary py-5 display-3 fw-bold ">
+      <div className="position-relative z-2   ">
+        <h1 className="text-center text-primary py-5 display-3 fw-bold mt-5">
           SIGN UP
         </h1>
         <img

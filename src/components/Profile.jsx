@@ -49,7 +49,7 @@ const Profile = () => {
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold mb-5"> MY PROFILE</h1>
+        <h1 className="text-center fw-bold my-5"> MY PROFILE</h1>
         <hr />
       </Row>
       <Row>

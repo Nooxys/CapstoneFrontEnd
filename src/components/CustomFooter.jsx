@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const CustomFooter = () => {
   return (
-    <div className="row justify-content-center pt-5  ">
+    <div className="row justify-content-center pt-5 border-top border-primary border-3 ">
       <div className="col col-6">
         <div className="row">
           <div className="col mb-2">
@@ -103,8 +103,9 @@ const CustomFooter = () => {
                   </a>
                 </p>
                 <p>
-                  <a href="#" alt="footer link">
-                    Corporate Information
+                  Image by{' '}
+                  <a href="https://www.freepik.com/free-photo/confident-sportswoman-with-dumbbell-dark_1719479.htm#query=gym%20wallpaper&position=6&from_view=keyword&track=ais_user&uuid=8385f45a-d547-496d-8b64-aec10163571e">
+                    Freepik
                   </a>
                 </p>
               </div>

@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold mb-5"> CONTACT US</h1>
+        <h1 className="text-center fw-bold my-5"> CONTACT US</h1>
         <hr />
       </Row>
       <Row className="mb-5">

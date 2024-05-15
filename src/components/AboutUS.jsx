@@ -7,7 +7,7 @@ const AboutUs = () => {
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold mb-5"> ABOUT US </h1>
+        <h1 className="text-center fw-bold my-5"> ABOUT US </h1>
         <hr />
       </Row>
 

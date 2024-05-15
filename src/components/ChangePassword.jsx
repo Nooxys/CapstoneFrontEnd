@@ -5,7 +5,7 @@ const ChangePassword = () => {
   return (
     <Container>
       <Row className="justify-content-center my-5">
-        <Col xs={10} md={6} lg={4} className="formGrap p-5 mb-5 ">
+        <Col xs={10} md={6} lg={4} className="formGrap p-5 my-5 ">
           <Form className="py-2 ">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className="text-white fw-bold">

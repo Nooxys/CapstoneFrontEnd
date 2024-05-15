@@ -7,8 +7,8 @@ import logo from '../assets/man-reglogin.png'
 const LoginPage = () => {
   return (
     <Container>
-      <div className="position-relative z-2 ">
-        <h1 className="text-center text-primary py-5 display-3 fw-bold ">
+      <div className="position-relative z-2  ">
+        <h1 className="text-center text-primary py-5 display-3 fw-bold mt-5">
           SIGN IN
         </h1>
         <img
