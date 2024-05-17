@@ -1,8 +1,49 @@
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import logo from '../assets/man-reglogin.png'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { REGISTER_ERRORS, REGISTER_OK, register } from '../redux/actions'
 
 const RegisterPage = () => {
+  const dispatch = useDispatch()
+
+  const registerErrors = useSelector(
+    (state) => state.authReducer.registerErrors
+  )
+
+  const registerOk = useSelector((state) => state.authReducer.registerOk)
+
+  const initialForm = {
+    name: '',
+    surname: '',
+    username: '',
+    email: '',
+    password: '',
+    birthDate: '',
+  }
+
+  const [form, setForm] = useState(initialForm)
+
+  const handleChange = (e, attribute) => {
+    setForm({
+      ...form,
+      [attribute]: e.target.value,
+    })
+  }
+
+  useEffect(() => {
+    dispatch({
+      type: REGISTER_OK,
+      payload: false,
+    })
+    dispatch({
+      type: REGISTER_ERRORS,
+      payload: false,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Container>
       <div className="position-relative z-2   ">
@@ -22,13 +63,26 @@ const RegisterPage = () => {
 
       <Row className="justify-content-center my-5">
         <Col xs={10} md={6} lg={4} className="formGrap p-5 mb-5 ">
-          <Form>
+          {registerOk === false && registerErrors !== null && (
+            <div className="text-primary mb-3">{registerErrors}</div>
+          )}
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault()
+              dispatch(register(form))
+            }}
+          >
             <Form.Group className="mb-3">
               <Form.Label className="text-white fw-bold">Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Your Name"
                 className="rounded-0"
+                required
+                value={form.name}
+                onChange={(e) => {
+                  handleChange(e, 'name')
+                }}
               />
             </Form.Group>
 
@@ -38,6 +92,11 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Your Surname"
                 className="rounded-0"
+                required
+                value={form.surname}
+                onChange={(e) => {
+                  handleChange(e, 'surname')
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -46,6 +105,11 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Your Username"
                 className="rounded-0"
+                required
+                value={form.username}
+                onChange={(e) => {
+                  handleChange(e, 'username')
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3  " controlId="formBasicEmail">
@@ -54,6 +118,11 @@ const RegisterPage = () => {
                 type="email"
                 placeholder="Noctfit@Noctfit.com"
                 className="rounded-0"
+                required
+                value={form.email}
+                onChange={(e) => {
+                  handleChange(e, 'email')
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -62,6 +131,11 @@ const RegisterPage = () => {
                 type="password"
                 placeholder="Password"
                 className="rounded-0"
+                required
+                value={form.password}
+                onChange={(e) => {
+                  handleChange(e, 'password')
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -70,6 +144,11 @@ const RegisterPage = () => {
                 type="date"
                 placeholder="Your Birth Date "
                 className="rounded-0"
+                required
+                value={form.birthDate}
+                onChange={(e) => {
+                  handleChange(e, 'birthDate')
+                }}
               />
             </Form.Group>
 
@@ -87,15 +166,27 @@ const RegisterPage = () => {
                   REGISTER
                 </Button>
               </Col>
-              <p className="text-center text-white pt-2">
-                Already have an account?
-                <Link
-                  className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1 fw-bold"
-                  to="/login"
-                >
-                  Login here!
-                </Link>
-              </p>
+              {registerOk && (
+                <div className="mb-3 text-center text-white">
+                  Registration complete!
+                  <Link className="text-decoration-none" to="/login">
+                    <span className="text-primary fw-bold hoverable ms-2">
+                      Login
+                    </span>
+                  </Link>
+                </div>
+              )}
+              {!registerOk && (
+                <p className="text-center text-white pt-2">
+                  Already have an account?
+                  <Link
+                    className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1 fw-bold"
+                    to="/login"
+                  >
+                    Login here!
+                  </Link>
+                </p>
+              )}
             </Row>
           </Form>
         </Col>

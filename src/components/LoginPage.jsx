@@ -1,13 +1,36 @@
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Alert } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/man-reglogin.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { login } from '../redux/actions'
 
 const LoginPage = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const initialForm = {
+    email: '',
+    password: '',
+  }
+  const [form, setForm] = useState(initialForm)
+
+  const handleChange = (e, attribute) => {
+    setForm({
+      ...form,
+      [attribute]: e.target.value,
+    })
+  }
+
+  const loginErrors = useSelector((state) => state.authReducer.loginErrors)
+  const accessToken = useSelector((state) => state.authReducer.accessToken)
+
   return (
     <Container>
       <div className="position-relative z-2  ">
+        {accessToken !== '' && navigate('/')}
         <h1 className="text-center text-primary py-5 display-3 fw-bold mt-5">
           SIGN IN
         </h1>
@@ -24,13 +47,27 @@ const LoginPage = () => {
 
       <Row className="justify-content-center my-5">
         <Col xs={10} md={6} lg={4} className="formGrap p-5 mb-5">
-          <Form className="py-2">
+          {loginErrors !== null && (
+            <div className="text-primary mb-3">{loginErrors}</div>
+          )}
+          <Form
+            className="py-2"
+            onSubmit={(e) => {
+              e.preventDefault()
+              dispatch(login(form))
+            }}
+          >
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className="text-white fw-bold">Email</Form.Label>
               <Form.Control
                 type="email"
+                required
                 placeholder="Noctfit@Noctfit.com"
                 className="rounded-0"
+                value={form.email}
+                onChange={(e) => {
+                  handleChange(e, 'email')
+                }}
               />
             </Form.Group>
 
@@ -38,8 +75,13 @@ const LoginPage = () => {
               <Form.Label className="text-white fw-bold">Password</Form.Label>
               <Form.Control
                 type="password"
+                required
                 placeholder="Password"
                 className="rounded-0"
+                value={form.password}
+                onChange={(e) => {
+                  handleChange(e, 'password')
+                }}
               />
             </Form.Group>
             <Form.Group

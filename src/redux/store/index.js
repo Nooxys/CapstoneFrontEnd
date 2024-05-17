@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import ex1 from '../reducers/ex1'
+import authReducer from '../reducers/authReducer'
 
 const globalReducer = combineReducers({
-  ex1: ex1,
+  authReducer: authReducer,
 })
 
 const store = configureStore({

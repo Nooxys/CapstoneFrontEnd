@@ -11,6 +11,7 @@ import Profile from './components/Profile'
 import ChangePassword from './components/ChangePassword'
 import Subscriptions from './components/Subscriptions'
 import Trainers from './components/Trainers'
+
 function App() {
   return (
     <>

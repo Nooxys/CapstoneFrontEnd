@@ -1,9 +1,12 @@
 // ACTION REFERENCES -------------------------------------------------------------------------------------------------------
 
 // export const EXAMPLE_1 = "EXAMPLE_1"
+const startingURL = 'http://localhost:3001'
 
-export const LOGIN = 'LOGIN'
-export const IS_LOADING = 'IS_LOADING'
+export const ACCESS_TOKEN = 'ACCESS_TOKEN'
+export const LOGIN_ERRORS = 'LOGIN_ERRORS'
+export const REGISTER_OK = 'REGISTER_OK'
+export const REGISTER_ERRORS = 'REGISTER_ERRORS'
 
 // ACTION CREATORS --------------------------------------------------------------------------------------------------------
 // Per la rimozione degli elementi da un array solitamente si utilizza l'indice dell'elemento come parametro
@@ -34,27 +37,69 @@ export const IS_LOADING = 'IS_LOADING'
 //     }
 //   };
 // };
-export const loading = () => ({
-  type: IS_LOADING,
-})
 
-export const login = () => {
-  return async (dispatch, getState) => {
+export const login = (payload) => {
+  return async (dispatch) => {
     try {
-      const response = await fetch('http://localhost:3001/auth/login')
+      const response = await fetch(startingURL + '/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
       if (response.ok) {
         const data = await response.json()
+        const accessToken = data.accessToken
         dispatch({
-          type: LOGIN,
-          payload: data,
+          type: ACCESS_TOKEN,
+          payload: accessToken,
+        })
+        dispatch({
+          type: LOGIN_ERRORS,
+          payload: false,
         })
       } else {
-        alert('Error fetching results')
+        const data = await response.json()
+        dispatch({
+          type: LOGIN_ERRORS,
+          payload: data.message,
+        })
       }
     } catch (error) {
       console.log(error)
-    } finally {
-      console.log('dopo eliminami')
+    }
+  }
+}
+
+export const register = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(startingURL + '/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      if (response.ok) {
+        dispatch({
+          type: REGISTER_ERRORS,
+          payload: null,
+        })
+        dispatch({
+          type: REGISTER_OK,
+          payload: true,
+        })
+      } else {
+        const data = await response.json()
+        dispatch({
+          type: REGISTER_ERRORS,
+          payload: data.message,
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
