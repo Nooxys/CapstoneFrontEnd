@@ -11,6 +11,7 @@ import Profile from './components/Profile'
 import ChangePassword from './components/ChangePassword'
 import Subscriptions from './components/Subscriptions'
 import Trainers from './components/Trainers'
+import ChangeInfo from './components/ChangeInfo'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route element={<Profile />} path="profile" />
               <Route element={<Subscriptions />} path="subscriptions" />
               <Route element={<ChangePassword />} path="password" />
+              <Route element={<ChangeInfo />} path="update" />
               <Route element={<Trainers />} path="trainers" />
               <Route element={<NotFound />} path="*" />
             </Routes>

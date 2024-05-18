@@ -4,8 +4,8 @@ import Form from 'react-bootstrap/Form'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/man-reglogin.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
-import { login } from '../redux/actions'
+import { useEffect, useState } from 'react'
+import { LOGIN_ERRORS, login } from '../redux/actions'
 
 const LoginPage = () => {
   const dispatch = useDispatch()
@@ -26,6 +26,15 @@ const LoginPage = () => {
 
   const loginErrors = useSelector((state) => state.authReducer.loginErrors)
   const accessToken = useSelector((state) => state.authReducer.accessToken)
+
+  useEffect(() => {
+    dispatch({
+      type: LOGIN_ERRORS,
+      payload: false,
+    })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Container>

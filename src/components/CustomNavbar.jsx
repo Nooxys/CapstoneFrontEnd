@@ -9,6 +9,7 @@ function CustomNavbar() {
   const location = useLocation().pathname
 
   const token = useSelector((state) => state.authReducer.accessToken)
+
   return (
     <Navbar
       collapseOnSelect
@@ -77,8 +78,8 @@ function CustomNavbar() {
                 location === '/login' ||
                 location === '/register' ||
                 location === '/profile'
-                  ? 'nav-link active'
-                  : 'nav-link'
+                  ? 'nav-link active '
+                  : 'nav-link '
               }
               to={token !== '' ? '/profile' : '/login'}
             >
