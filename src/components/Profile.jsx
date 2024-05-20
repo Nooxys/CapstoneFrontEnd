@@ -96,12 +96,12 @@ const Profile = () => {
                 <p className="fw-bold me-2">birth date:</p>
               </Col>
               <Col xs={9} className="p-0 text-center text-sm-start">
-                <p>{user.name}.</p>
-                <p>{user.surname}.</p>
-                <p>{user.username}.</p>
-                <p>{user.email}.</p>
-                <p>*******.</p>
-                <p>{user.birthDate}.</p>
+                <p>{user.name}</p>
+                <p>{user.surname}</p>
+                <p>{user.username}</p>
+                <p>{user.email}</p>
+                <p>*******</p>
+                <p>{user.birthDate}</p>
               </Col>
               <div>
                 <p className="fw-bold  mb-1 mt-5">change avatar</p>

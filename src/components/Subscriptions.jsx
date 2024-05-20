@@ -1,8 +1,22 @@
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
-import photo from '../assets/compress-strong-man-training-gym-min-scaled.webp'
+import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
+// import photo from '../assets/compress-strong-man-training-gym-min-scaled.webp'
 import { Link } from 'react-router-dom'
 import athlete from '../assets/transparent-sports-fitness-exercise-workout-squats-man-and-woman-working-out-together-closely65fff7049969f3.83515924.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getSubs } from '../redux/actions'
 const Subscriptions = () => {
+  const dispatch = useDispatch()
+  const token = useSelector((state) => state.authReducer.accessToken)
+  const subs = useSelector((state) => state.subReducer.subs)
+  const isLoading = useSelector((state) => state.subReducer.isLoading)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    dispatch(getSubs(token))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Container className="mb-5">
       <Row>
@@ -43,21 +57,33 @@ const Subscriptions = () => {
       </Row>
       <hr />
       <Row>
-        <Col xs={12} xl={4}>
-          <Card>
-            <Card.Img src={photo} alt="Card image" />
-            <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white subscriptions">
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>placeholder - placeholder</Card.Text>
-              <Button
-                className="
-              mb-2 text-white rounded rounded-0 fw-bold"
-              >
-                DETAILS <i className="bi bi-arrow-right"></i>
-              </Button>
-            </Card.ImgOverlay>
-          </Card>
-        </Col>
+        {subs === null && (
+          <Col className="mt-5 d-flex justify-content-center align-items-center">
+            <Spinner animation="border" variant="primary"></Spinner>
+          </Col>
+        )}
+        {subs !== null &&
+          subs.content.map((sub) => {
+            return (
+              <Col xs={12} md={6} xl={4} key={sub.id} className="g-2">
+                <Card>
+                  <Card.Img src={sub.cover} alt="sub cover" />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white subscriptions">
+                    <Card.Title>{sub.title}</Card.Title>
+                    <Card.Text>
+                      € {sub.price} - {sub.daysOfDuration} days
+                    </Card.Text>
+                    <Button
+                      className="
+            mb-2 text-white rounded rounded-0 fw-bold"
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+            )
+          })}
       </Row>
     </Container>
   )

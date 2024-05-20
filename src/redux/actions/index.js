@@ -13,6 +13,14 @@ export const UPDATE_OK = 'UPDATE_OK'
 export const UPDATE_ERRORS = 'UPDATE_ERRORS'
 export const PASSWORD_OK = 'PASSWORD_OK'
 export const PASSWORD_ERRORS = 'PASSWORD_ERRORS'
+export const GET_SUB = 'GET_SUB'
+export const GET_SUBS = 'GET_SUBS'
+export const IS_LOADING_SUB = 'IS_LOADING_SUB'
+export const GET_TRAINERS = 'GET_TRAINERS'
+export const GET_RESERVATIONS = 'GET_RESERVATIONS'
+export const IS_LOADING_RES = 'IS_LOADING_RES'
+export const POST_RESERVATION_OK = 'POST_RESERVATION_OK'
+export const POST_RESERVATION_ERRORS = 'POST_RESERVATION_ERRORS'
 
 // ACTION CREATORS --------------------------------------------------------------------------------------------------------
 // Per la rimozione degli elementi da un array solitamente si utilizza l'indice dell'elemento come parametro
@@ -141,6 +149,37 @@ export const getMe = (accessToken) => {
   }
 }
 
+export const getTrainers = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/users/trainers', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_TRAINERS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING,
+        payload: false,
+      })
+    }
+  }
+}
+
 export const updateMe = (accessToken, body) => {
   return async (dispatch) => {
     try {
@@ -203,6 +242,132 @@ export const updatePassword = (accessToken, body) => {
         const data = await response.json()
         dispatch({
           type: PASSWORD_ERRORS,
+          payload: data.message,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getSubs = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_SUB,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/subscriptions', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_SUBS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_SUB,
+        payload: false,
+      })
+    }
+  }
+}
+
+export const getSub = (accessToken, id) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_SUB,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/subscriptions/' + id, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_SUB,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_SUB,
+        payload: false,
+      })
+    }
+  }
+}
+
+export const getReservations = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_RES,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/reservations', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_RESERVATIONS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_RES,
+        payload: false,
+      })
+    }
+  }
+}
+
+export const addReservation = (accessToken, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(startingURL + '/reservations', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      if (response.ok) {
+        dispatch({
+          type: POST_RESERVATION_OK,
+          payload: true,
+        })
+        dispatch({
+          type: POST_RESERVATION_ERRORS,
+          payload: null,
+        })
+      } else {
+        const data = await response.json()
+        dispatch({
+          type: POST_RESERVATION_ERRORS,
           payload: data.message,
         })
       }

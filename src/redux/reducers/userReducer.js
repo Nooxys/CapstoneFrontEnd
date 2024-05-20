@@ -1,5 +1,6 @@
 import {
   GET_ME,
+  GET_TRAINERS,
   IS_LOADING,
   PASSWORD_ERRORS,
   PASSWORD_OK,
@@ -14,6 +15,7 @@ const initialState = {
   updateErrors: null,
   passwordOk: null,
   passwordErrors: null,
+  trainers: null,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -52,6 +54,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         passwordErrors: action.payload,
+      }
+
+    case GET_TRAINERS:
+      return {
+        ...state,
+        trainers: action.payload,
       }
 
     default:
