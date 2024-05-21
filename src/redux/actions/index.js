@@ -21,6 +21,7 @@ export const GET_RESERVATIONS = 'GET_RESERVATIONS'
 export const IS_LOADING_RES = 'IS_LOADING_RES'
 export const POST_RESERVATION_OK = 'POST_RESERVATION_OK'
 export const POST_RESERVATION_ERRORS = 'POST_RESERVATION_ERRORS'
+export const GET_MY_RESERVATIONS = 'GET_MY_RESERVATIONS'
 
 // ACTION CREATORS --------------------------------------------------------------------------------------------------------
 // Per la rimozione degli elementi da un array solitamente si utilizza l'indice dell'elemento come parametro
@@ -373,6 +374,37 @@ export const addReservation = (accessToken, payload) => {
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+}
+
+export const getMyReservations = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_RES,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/reservations/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_MY_RESERVATIONS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_RES,
+        payload: false,
+      })
     }
   }
 }

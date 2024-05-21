@@ -1,6 +1,6 @@
 import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
 // import photo from '../assets/compress-strong-man-training-gym-min-scaled.webp'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import athlete from '../assets/transparent-sports-fitness-exercise-workout-squats-man-and-woman-working-out-together-closely65fff7049969f3.83515924.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -10,6 +10,8 @@ const Subscriptions = () => {
   const token = useSelector((state) => state.authReducer.accessToken)
   const subs = useSelector((state) => state.subReducer.subs)
   const isLoading = useSelector((state) => state.subReducer.isLoading)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -74,6 +76,9 @@ const Subscriptions = () => {
                       € {sub.price} - {sub.daysOfDuration} days
                     </Card.Text>
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + sub.id)
+                      }}
                       className="
             mb-2 text-white rounded rounded-0 fw-bold"
                     >

@@ -10,7 +10,6 @@ const ChangeInfo = () => {
     surname: '',
     username: '',
     email: '',
-    password: '',
     birthDate: '',
   }
 
@@ -106,19 +105,6 @@ const ChangeInfo = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label className="text-white fw-bold">Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                className="rounded-0"
-                required
-                value={form.password}
-                onChange={(e) => {
-                  handleChange(e, 'password')
-                }}
-              />
-            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label className="text-white fw-bold">Birth Date</Form.Label>
               <Form.Control
@@ -149,7 +135,7 @@ const ChangeInfo = () => {
               </Col>
               {updateOk && (
                 <div className="mb-3 text-center text-white">
-                  Updated! Go back to
+                  info updated! Go back to
                   <Link className="text-decoration-none" to="/profile">
                     <span className="text-primary fw-bold hoverable ms-2">
                       Profile

@@ -2,7 +2,7 @@ import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { ACCESS_TOKEN, getMe } from '../redux/actions'
+import { ACCESS_TOKEN, getMe, getMyReservations } from '../redux/actions'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -13,6 +13,9 @@ const Profile = () => {
 
   const accessToken = useSelector((state) => state.authReducer.accessToken)
   const user = useSelector((state) => state.userReducer.user)
+  const myReservations = useSelector(
+    (state) => state.reservationReducer.myReservations
+  )
   // const isLoading = useSelector((state) => state.userReducer.isLoading)
 
   const [bmiValue, setBmiValue] = useState('')
@@ -52,8 +55,15 @@ const Profile = () => {
     }
   }
 
+  const stringFormatter = (string) => {
+    if (string.charAt(11) === '0') {
+      return string.slice(0, 10) + ' -- ' + string.slice(12, 16)
+    } else return string.slice(0, 10) + ' -- ' + string.slice(11, 16)
+  }
+
   useEffect(() => {
     dispatch(getMe(accessToken))
+    dispatch(getMyReservations(accessToken))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -128,10 +138,6 @@ const Profile = () => {
                         type: ACCESS_TOKEN,
                         payload: '',
                       })
-                      // dispatch({
-                      //   type: GET_ME,
-                      //   payload: null,
-                      // })
                     }}
                     className="fw-bold  mb-3"
                   >
@@ -202,25 +208,80 @@ const Profile = () => {
             </Form>
           </Col>
           <hr />
-          <Col xs={12} lg={6} className="mb-5 mb-md-0">
+          <Col xs={12} lg={4} className="mb-4 mb-md-0">
             <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0 ">
               Your Reviews:
             </h2>
             <p className="fw-bold mb-0 text-center text-md-start ">
               PlaceholderTitle
             </p>
-            <p className="mb-0 text-center text-md-start mb-5 mb-lg-0">
+            <p className="mb-0 text-center text-md-start mb-4 mb-lg-0">
               PlaceHolderRating
             </p>
           </Col>
-          <Col xs={12} lg={6} className="mb-5 mb-md-0">
+          <Col xs={12} lg={4} className="mb-4 mb-md-0">
             <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">
               Your Subscriptions:
             </h2>
             <p className="fw-bold mb-0 text-center text-md-start">
               PlaceholderTitle
             </p>
-            <p className=" mb-0 text-center text-md-start">PlaceholderDays</p>
+            <p className=" mb-0 text-center text-md-start mb-4 mb-lg-0">
+              PlaceholderDays
+            </p>
+          </Col>
+          <Col xs={12} lg={4} className="mb-4 mb-md-0">
+            <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">
+              Your Reservations:
+            </h2>
+            {myReservations !== null &&
+              myReservations.content.map((reservation) => {
+                return (
+                  <div
+                    key={reservation.id}
+                    id={reservation.id}
+                    className="d-flex justify-content-between"
+                  >
+                    <div>
+                      <p className="fw-bold mb-1 text-center text-md-start ">
+                        {reservation.pt.name + ' ' + reservation.pt.surname}{' '}
+                      </p>
+                      <p className=" mb-0 text-center text-md-start  mb-4 mb-lg-2">
+                        {stringFormatter(reservation.date)}
+                      </p>
+                    </div>
+
+                    <Button
+                      className=" px-3 text-white rounded-0 mb-3 "
+                      onClick={async (e) => {
+                        console.log(e.target.closest('div').id)
+                        try {
+                          const response = await fetch(
+                            `
+                    http://localhost:3001/reservations/${
+                      e.target.closest('div').id
+                    }`,
+                            {
+                              method: 'DELETE',
+                              headers: {
+                                Authorization: `Bearer ${accessToken}`,
+                              },
+                            }
+                          )
+                          if (response.ok) {
+                            dispatch(getMyReservations(accessToken))
+                          }
+                        } catch (error) {
+                          console.log(error)
+                        }
+                      }}
+                    >
+                      {' '}
+                      <i className="bi bi-calendar2-x"></i>
+                    </Button>
+                  </div>
+                )
+              })}
           </Col>
         </Row>
       )}

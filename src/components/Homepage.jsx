@@ -119,7 +119,7 @@ const Homepage = () => {
               you maintain perpetually,
               <span className=" ms-1 fw-bold">Noctfit</span> will do the rest!
             </p>
-            <Row className="my-4  ">
+            <Row className="my-4  d-none d-lg-flex">
               <Col
                 xs={12}
                 lg={4}
@@ -143,13 +143,37 @@ const Homepage = () => {
                 <h5 className="fw-bold mt-3">SAFE GYM MACHINES</h5>
               </Col>
             </Row>
+            <Row className="my-4 d-lg-none ">
+              <Col
+                xs={12}
+                lg={4}
+                className=" py-3 border-dark-subtle text-center"
+              >
+                <img src={image1} alt="icon_lift1" width={60} />
+                <h5 className="fw-bold mt-3">CERTIFIED TRAINERS</h5>
+              </Col>
+              <Col
+                xs={12}
+                lg={4}
+                className=" py-3 border-dark-subtle text-center "
+              >
+                {' '}
+                <img src={image2} alt="icon_lift2" width={60} />
+                <h5 className="fw-bold mt-3">MODERN EQUIPMENTS </h5>
+              </Col>
+              <Col xs={12} lg={4} className=" py-3 text-center ">
+                {' '}
+                <img src={image3} alt="icon_lift3" width={60} />
+                <h5 className="fw-bold mt-3">SAFE GYM MACHINES</h5>
+              </Col>
+            </Row>
             <Link to={'/about'}>
               <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">
                 ABOUT US <i className="bi bi-arrow-right"></i>
               </Button>
             </Link>
           </Col>
-          <Col xs={10} md={5} className="d-none d-md-block mb-5">
+          <Col xs={10} md={5} className="d-none d-md-block mb-5 mt-5 mt-lg-0">
             <img src={athlete} alt="athlete_celebrating" width={350} />
           </Col>
         </Row>

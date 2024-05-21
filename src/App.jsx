@@ -12,6 +12,7 @@ import ChangePassword from './components/ChangePassword'
 import Subscriptions from './components/Subscriptions'
 import Trainers from './components/Trainers'
 import ChangeInfo from './components/ChangeInfo'
+import SubDetails from './components/SubDetails'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route element={<ChangePassword />} path="password" />
               <Route element={<ChangeInfo />} path="update" />
               <Route element={<Trainers />} path="trainers" />
+              <Route element={<SubDetails />} path="details/:id" />
               <Route element={<NotFound />} path="*" />
             </Routes>
             <footer>

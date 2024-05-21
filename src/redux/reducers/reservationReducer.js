@@ -1,4 +1,5 @@
 import {
+  GET_MY_RESERVATIONS,
   GET_RESERVATIONS,
   IS_LOADING_RES,
   POST_RESERVATION_ERRORS,
@@ -10,6 +11,7 @@ const initialState = {
   isLoading: false,
   newReservationOk: false,
   newReservationErrors: null,
+  myReservations: null,
 }
 
 const reservationReducer = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const reservationReducer = (state = initialState, action) => {
       return {
         ...state,
         newReservationErrors: action.payload,
+      }
+
+    case GET_MY_RESERVATIONS:
+      return {
+        ...state,
+        myReservations: action.payload,
       }
 
     default:

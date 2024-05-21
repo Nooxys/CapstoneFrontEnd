@@ -1,28 +1,85 @@
-import { Button, Col, Container, Modal, Row, Spinner } from 'react-bootstrap'
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+  Spinner,
+} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getTrainers } from '../redux/actions'
+import {
+  POST_RESERVATION_ERRORS,
+  POST_RESERVATION_OK,
+  addReservation,
+  getTrainers,
+} from '../redux/actions'
 
 const Trainers = () => {
-  const initialForm = {
+  // ------------------
+
+  const initialDateTimeForm = {
     date: '',
     time: '',
   }
 
-  const [show, setShow] = useState(false)
+  const [dateTimeForm, setDateTimeForm] = useState(initialDateTimeForm)
 
-  const handleClose = () => setShow(false)
+  const handleTimeFormChange = (e, attribute) => {
+    setDateTimeForm({
+      ...dateTimeForm,
+      [attribute]: e.target.value,
+    })
+  }
+
+  // ------------------
+
+  const initialPostForm = {
+    ptId: '',
+    date: '',
+  }
+
+  const [postForm, setPostForm] = useState(initialPostForm)
+
+  const [show, setShow] = useState(false)
+  const handleClose = () => {
+    setShow(false)
+    dispatch({
+      type: POST_RESERVATION_OK,
+      payload: false,
+    })
+    dispatch({
+      type: POST_RESERVATION_ERRORS,
+      payload: null,
+    })
+    setDateTimeForm(initialDateTimeForm)
+  }
   const handleShow = () => setShow(true)
 
   const dispatch = useDispatch()
   const token = useSelector((state) => state.authReducer.accessToken)
   const trainers = useSelector((state) => state.userReducer.trainers)
+  const addRes = useSelector(
+    (state) => state.reservationReducer.newReservationOk
+  )
+  const addResErrors = useSelector(
+    (state) => state.reservationReducer.newReservationErrors
+  )
 
   useEffect(() => {
     window.scrollTo(0, 0)
     dispatch(getTrainers(token))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    setPostForm({
+      ...postForm,
+      date: dateTimeForm.date + dateTimeForm.time,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dateTimeForm])
 
   return (
     <Container className="mb-5">
@@ -65,7 +122,13 @@ const Trainers = () => {
                     <Button
                       className="
                 mb-3 text-white rounded rounded-0 fw-bold"
-                      onClick={handleShow}
+                      onClick={() => {
+                        handleShow()
+                        setPostForm({
+                          ...postForm,
+                          ptId: trainer.id,
+                        })
+                      }}
                     >
                       BOOK
                     </Button>
@@ -76,8 +139,69 @@ const Trainers = () => {
           })}
       </Row>
       <Modal show={show} onHide={handleClose} className="">
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        {addResErrors && (
+          <div className="text-primary  px-4 mt-5 fw-bold">{addResErrors}</div>
+        )}
+        {addRes && (
+          <>
+            <div className="px-4 mt-5 fw-bold">Trainer Booked!</div>
+            <p className="px-4 ">
+              To see this reservation, go to your personal area!
+            </p>
+          </>
+        )}
+
+        <Modal.Body>
+          <Form
+            id="reservationForm"
+            onSubmit={(e) => {
+              e.preventDefault()
+              dispatch(addReservation(token, postForm))
+            }}
+          >
+            <Form.Group className="mb-4">
+              <Form.Label className="text-black opacity-75 fw-bold ">
+                Date
+              </Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="DATE"
+                required
+                value={dateTimeForm.date}
+                onChange={(e) => {
+                  handleTimeFormChange(e, 'date')
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label className="text-black opacity-75 fw-bold">
+                Time
+              </Form.Label>
+              <Form.Select
+                value={dateTimeForm.time}
+                onChange={(e) => {
+                  handleTimeFormChange(e, 'time')
+                }}
+                required
+              >
+                <option default value="">
+                  ---
+                </option>
+                <option value="T09:00:00.000">9.00</option>
+                <option value="T10:00:00.000">10.00</option>
+                <option value="T11:00:00.000">11.00</option>
+                <option value="T12:00:00.000">12.00</option>
+                <option value="T13:00:00.000">13.00</option>
+                <option value="T14:00:00.000">14.00</option>
+                <option value="T15:00:00.000">15.00</option>
+                <option value="T16:00:00.000">16.00</option>
+                <option value="T17:00:00.000">17.00</option>
+                <option value="T18:00:00.000">18.00</option>
+                <option value="T19:00:00.000">19.00</option>
+              </Form.Select>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
         <Modal.Footer>
           <Button
             variant="danger"
@@ -86,12 +210,15 @@ const Trainers = () => {
           >
             Close
           </Button>
-          <Button
-            className="mb-3 text-white rounded rounded-0 fw-bold"
-            onClick={handleClose}
-          >
-            Confirm
-          </Button>
+          {!addRes && (
+            <Button
+              className="mb-3 text-white rounded rounded-0 fw-bold"
+              form="reservationForm"
+              type="submit"
+            >
+              Confirm
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </Container>
