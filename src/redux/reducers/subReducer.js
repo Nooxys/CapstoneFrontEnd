@@ -1,9 +1,19 @@
-import { GET_SUB, GET_SUBS, IS_LOADING_SUB } from '../actions'
+import {
+  ASSIGN_SUB_ERRORS,
+  ASSIGN_SUB_OK,
+  GET_MY_SUBS,
+  GET_SUB,
+  GET_SUBS,
+  IS_LOADING_SUB,
+} from '../actions'
 
 const initialState = {
   subs: null,
   isLoading: false,
   singleSub: null,
+  assignOK: false,
+  assignErrors: null,
+  mySubs: null,
 }
 
 const subReducer = (state = initialState, action) => {
@@ -24,6 +34,24 @@ const subReducer = (state = initialState, action) => {
       return {
         ...state,
         singleSub: action.payload,
+      }
+
+    case ASSIGN_SUB_OK:
+      return {
+        ...state,
+        assignOK: action.payload,
+      }
+
+    case ASSIGN_SUB_ERRORS:
+      return {
+        ...state,
+        assignErrors: action.payload,
+      }
+
+    case GET_MY_SUBS:
+      return {
+        ...state,
+        mySubs: action.payload,
       }
 
     default:

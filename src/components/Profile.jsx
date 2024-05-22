@@ -2,7 +2,13 @@ import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { ACCESS_TOKEN, getMe, getMyReservations } from '../redux/actions'
+import {
+  ACCESS_TOKEN,
+  getMe,
+  getMyReservations,
+  getMyReviews,
+  getMySubs,
+} from '../redux/actions'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -16,7 +22,9 @@ const Profile = () => {
   const myReservations = useSelector(
     (state) => state.reservationReducer.myReservations
   )
+  const mySubs = useSelector((state) => state.subReducer.mySubs)
   // const isLoading = useSelector((state) => state.userReducer.isLoading)
+  const myReviews = useSelector((state) => state.reviewReducer.myReviews)
 
   const [bmiValue, setBmiValue] = useState('')
   const [bmiMessage, setBmiMessage] = useState('')
@@ -64,6 +72,8 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getMe(accessToken))
     dispatch(getMyReservations(accessToken))
+    dispatch(getMySubs(accessToken))
+    dispatch(getMyReviews(accessToken))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -212,23 +222,55 @@ const Profile = () => {
             <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0 ">
               Your Reviews:
             </h2>
-            <p className="fw-bold mb-0 text-center text-md-start ">
-              PlaceholderTitle
-            </p>
-            <p className="mb-0 text-center text-md-start mb-4 mb-lg-0">
-              PlaceHolderRating
-            </p>
+            {myReviews !== null &&
+              myReviews.map((review) => {
+                return (
+                  <div
+                    key={review.id}
+                    id={review.id}
+                    className="d-flex justify-content-between"
+                  >
+                    <div>
+                      {' '}
+                      <p className="fw-bold mb-0 text-center text-md-start ">
+                        {review.title}
+                      </p>
+                      <p className="mb-0 text-center text-md-start mb-4 mb-lg-0">
+                        {review.description}
+                      </p>
+                      <p className="mb-0 text-center text-md-start mb-4 mb-lg-0">
+                        {review.rating}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
           </Col>
           <Col xs={12} lg={4} className="mb-4 mb-md-0">
             <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">
               Your Subscriptions:
             </h2>
-            <p className="fw-bold mb-0 text-center text-md-start">
-              PlaceholderTitle
-            </p>
-            <p className=" mb-0 text-center text-md-start mb-4 mb-lg-0">
-              PlaceholderDays
-            </p>
+            {mySubs !== null &&
+              mySubs.content.map((sub) => {
+                return (
+                  <div
+                    key={sub.id}
+                    id={sub.id}
+                    className="d-flex justify-content-between"
+                  >
+                    <div>
+                      <p className="fw-bold mb-0 text-center text-md-start">
+                        {sub.title}
+                      </p>
+                      <p className=" mb-0 text-center text-md-start mb-4 mb-lg-0">
+                        validity:{' '}
+                        <span className="fw-bold">{sub.daysOfDuration} </span>
+                        days
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
           </Col>
           <Col xs={12} lg={4} className="mb-4 mb-md-0">
             <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">

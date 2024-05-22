@@ -22,6 +22,14 @@ export const IS_LOADING_RES = 'IS_LOADING_RES'
 export const POST_RESERVATION_OK = 'POST_RESERVATION_OK'
 export const POST_RESERVATION_ERRORS = 'POST_RESERVATION_ERRORS'
 export const GET_MY_RESERVATIONS = 'GET_MY_RESERVATIONS'
+export const ASSIGN_SUB_OK = 'ASSIGN_SUB_OK'
+export const ASSIGN_SUB_ERRORS = 'ASSIGN_SUB_ERRORS'
+export const GET_MY_SUBS = 'GET_MY_SUB'
+export const GET_REVIEWS = 'GET_REVIEWS'
+export const IS_LOADING_REV = 'IS_LOADING_REV'
+export const GET_MY_REVIEWS = 'GET_MY_REVIEWS'
+export const POST_REVIEW_OK = 'POST_REVIEW_OK'
+export const POST_REVIEW_ERRORS = 'POST_REVIEW_ERRORS'
 
 // ACTION CREATORS --------------------------------------------------------------------------------------------------------
 // Per la rimozione degli elementi da un array solitamente si utilizza l'indice dell'elemento come parametro
@@ -150,18 +158,15 @@ export const getMe = (accessToken) => {
   }
 }
 
-export const getTrainers = (accessToken) => {
+export const getTrainers = () => {
   return async (dispatch) => {
     dispatch({
       type: IS_LOADING,
       payload: true,
     })
     try {
-      const response = await fetch(startingURL + '/users/trainers', {
+      const response = await fetch(startingURL + '/general/trainers', {
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       })
       if (response.ok) {
         const data = await response.json()
@@ -252,18 +257,15 @@ export const updatePassword = (accessToken, body) => {
   }
 }
 
-export const getSubs = (accessToken) => {
+export const getSubs = () => {
   return async (dispatch) => {
     dispatch({
       type: IS_LOADING_SUB,
       payload: true,
     })
     try {
-      const response = await fetch(startingURL + '/subscriptions', {
+      const response = await fetch(startingURL + '/general/subscriptions', {
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       })
       if (response.ok) {
         const data = await response.json()
@@ -283,19 +285,19 @@ export const getSubs = (accessToken) => {
   }
 }
 
-export const getSub = (accessToken, id) => {
+export const getSub = (id) => {
   return async (dispatch) => {
     dispatch({
       type: IS_LOADING_SUB,
       payload: true,
     })
     try {
-      const response = await fetch(startingURL + '/subscriptions/' + id, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      const response = await fetch(
+        startingURL + '/general/subscriptions/' + id,
+        {
+          method: 'GET',
+        }
+      )
       if (response.ok) {
         const data = await response.json()
         dispatch({
@@ -314,18 +316,76 @@ export const getSub = (accessToken, id) => {
   }
 }
 
-export const getReservations = (accessToken) => {
+export const assignSub = (token, id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        startingURL + '/subscriptions/' + id + '/users/me',
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      if (response.ok) {
+        dispatch({
+          type: ASSIGN_SUB_OK,
+          payload: true,
+        })
+      } else {
+        const data = await response.json()
+        dispatch({
+          type: ASSIGN_SUB_ERRORS,
+          payload: data.message,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getMySubs = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_SUB,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/subscriptions/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_MY_SUBS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_SUB,
+        payload: false,
+      })
+    }
+  }
+}
+
+export const getReservations = () => {
   return async (dispatch) => {
     dispatch({
       type: IS_LOADING_RES,
       payload: true,
     })
     try {
-      const response = await fetch(startingURL + '/reservations', {
+      const response = await fetch(startingURL + '/general/reservations', {
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       })
       if (response.ok) {
         const data = await response.json()
@@ -403,6 +463,98 @@ export const getMyReservations = (accessToken) => {
     } finally {
       dispatch({
         type: IS_LOADING_RES,
+        payload: false,
+      })
+    }
+  }
+}
+
+export const addReview = (accessToken, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(startingURL + '/reviews', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      if (response.ok) {
+        dispatch({
+          type: POST_REVIEW_OK,
+          payload: true,
+        })
+        dispatch({
+          type: POST_RESERVATION_ERRORS,
+          payload: null,
+        })
+      } else {
+        const data = await response.json()
+        dispatch({
+          type: POST_REVIEW_ERRORS,
+          payload: data.message,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const getAllReviews = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_REV,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/general/reviews', {
+        method: 'GET',
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_REVIEWS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_REV,
+        payload: false,
+      })
+    }
+  }
+}
+
+export const getMyReviews = (token) => {
+  return async (dispatch) => {
+    dispatch({
+      type: IS_LOADING_REV,
+      payload: true,
+    })
+    try {
+      const response = await fetch(startingURL + '/reviews/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        dispatch({
+          type: GET_MY_REVIEWS,
+          payload: data,
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch({
+        type: IS_LOADING_REV,
         payload: false,
       })
     }

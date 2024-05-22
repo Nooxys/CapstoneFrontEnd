@@ -2,17 +2,32 @@ import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getSub } from '../redux/actions'
+import {
+  ASSIGN_SUB_ERRORS,
+  ASSIGN_SUB_OK,
+  assignSub,
+  getSub,
+} from '../redux/actions'
 const SubDetails = () => {
   const param = useParams().id
   const dispatch = useDispatch()
 
   const token = useSelector((state) => state.authReducer.accessToken)
   const sub = useSelector((state) => state.subReducer.singleSub)
+  const assignOK = useSelector((state) => state.subReducer.assignOK)
+  const assignErrors = useSelector((state) => state.subReducer.assignErrors)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(getSub(token, param))
+    dispatch(getSub(param))
+    dispatch({
+      type: ASSIGN_SUB_OK,
+      data: false,
+    })
+    dispatch({
+      type: ASSIGN_SUB_ERRORS,
+      data: null,
+    })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -37,6 +52,9 @@ const SubDetails = () => {
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
                     <Button
+                      onClick={() => {
+                        dispatch(assignSub(token, param))
+                      }}
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
                     >

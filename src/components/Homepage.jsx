@@ -6,6 +6,7 @@ import {
   Container,
   Form,
   Row,
+  Spinner,
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import athlete from '../assets/athlete_celebrating.png'
@@ -17,10 +18,17 @@ import rest from '../assets/rest.png'
 import friendly from '../assets/friendly.png'
 import custom from '../assets/custom.png'
 import photo from '../assets/compress-strong-man-training-gym-min-scaled.webp'
-import photo2 from '../assets/transparent-healthy-lifestyle-fit-man-with-clipboard-in-gym66006193dcf420.52604586.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllReviews, getSubs, getTrainers } from '../redux/actions'
 
 const Homepage = () => {
+  const dispatch = useDispatch()
+  const trainers = useSelector((state) => state.userReducer.trainers)
+  const subs = useSelector((state) => state.subReducer.subs)
+  const user = useSelector((state) => state.userReducer.user)
+  const reviews = useSelector((state) => state.reviewReducer.reviews)
+
   const initialForm = {
     heightValue: '',
     weightValue: '',
@@ -62,6 +70,15 @@ const Homepage = () => {
       setBmiMessage('')
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    dispatch(getTrainers())
+    dispatch(getSubs())
+    dispatch(getAllReviews())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <>
       <Container fluid className="p-0 border-bottom border-primary border-3">
@@ -298,126 +315,135 @@ const Homepage = () => {
           We Offer Many Flexible Susbscriptions
         </h2>
         <Row className="mt-5 g-3 mb-5 ">
-          <Col xs={12} lg={6}>
-            <Card>
-              <Card.Img
-                src={photo}
-                alt="Card image"
-                height={350}
-                className="homeSub"
-              />
-              <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>placeholder - placeholder</Card.Text>
-                <Button
-                  className="
+          {subs === null && (
+            <Col className="mt-5 d-flex justify-content-center align-items-center">
+              <Spinner animation="border" variant="primary"></Spinner>
+            </Col>
+          )}
+          {subs !== null && (
+            <>
+              <Col xs={12} lg={6}>
+                <Card>
+                  <Card.Img
+                    src={photo}
+                    alt="Card image"
+                    height={350}
+                    className="homeSub"
+                  />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Button
+                      className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                >
-                  DETAILS <i className="bi bi-arrow-right"></i>
-                </Button>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-          <Col xs={12} lg={3}>
-            <Card>
-              <Card.Img
-                src={photo}
-                alt="Card image"
-                height={350}
-                className="homeSub"
-              />
-              <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>placeholder - placeholder</Card.Text>
-                <Button
-                  className="
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+              <Col xs={12} lg={3}>
+                <Card>
+                  <Card.Img
+                    src={photo}
+                    alt="Card image"
+                    height={350}
+                    className="homeSub"
+                  />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Button
+                      className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                >
-                  DETAILS <i className="bi bi-arrow-right"></i>
-                </Button>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-          <Col xs={12} lg={3}>
-            <Card>
-              <Card.Img
-                src={photo}
-                alt="Card image"
-                height={350}
-                className="homeSub"
-              />
-              <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>placeholder - placeholder</Card.Text>
-                <Button
-                  className="
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+              <Col xs={12} lg={3}>
+                <Card>
+                  <Card.Img
+                    src={photo}
+                    alt="Card image"
+                    height={350}
+                    className="homeSub"
+                  />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Button
+                      className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                >
-                  DETAILS <i className="bi bi-arrow-right"></i>
-                </Button>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-          <Col xs={12} lg={3}>
-            <Card>
-              <Card.Img
-                src={photo}
-                alt="Card image"
-                height={350}
-                className="homeSub"
-              />
-              <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>placeholder - placeholder</Card.Text>
-                <Button
-                  className="
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+              <Col xs={12} lg={3}>
+                <Card>
+                  <Card.Img
+                    src={photo}
+                    alt="Card image"
+                    height={350}
+                    className="homeSub"
+                  />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Button
+                      className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                >
-                  DETAILS <i className="bi bi-arrow-right"></i>
-                </Button>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-          <Col xs={12} lg={3}>
-            <Card>
-              <Card.Img
-                src={photo}
-                alt="Card image"
-                height={350}
-                className="homeSub"
-              />
-              <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub ">
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>placeholder - placeholder</Card.Text>
-                <Button
-                  className="
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+              <Col xs={12} lg={3}>
+                <Card>
+                  <Card.Img
+                    src={photo}
+                    alt="Card image"
+                    height={350}
+                    className="homeSub"
+                  />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub ">
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Button
+                      className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                >
-                  DETAILS <i className="bi bi-arrow-right"></i>
-                </Button>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-          <Col xs={12} lg={6}>
-            <Card>
-              <Card.Img
-                src={photo}
-                alt="Card image"
-                height={350}
-                className="homeSub"
-              />
-              <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>placeholder - placeholder</Card.Text>
-                <Button
-                  className="
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+              <Col xs={12} lg={6}>
+                <Card>
+                  <Card.Img
+                    src={photo}
+                    alt="Card image"
+                    height={350}
+                    className="homeSub"
+                  />
+                  <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
+                    <Card.Title>Card title</Card.Title>
+                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Button
+                      className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                >
-                  DETAILS <i className="bi bi-arrow-right"></i>
-                </Button>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
+                    >
+                      DETAILS <i className="bi bi-arrow-right"></i>
+                    </Button>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+            </>
+          )}
         </Row>
         <Row className="justify-content-end align-items-center text-end mb-4">
           <Col xs={5} sm={6} md={8} lg={9}>
@@ -436,45 +462,74 @@ const Homepage = () => {
         <h5 className="fw-bold mb-4 text-center   ">OUR TRAINERS</h5>
         <h2 className="fw-bold text-center mb-5">Team Of Expert Trainers</h2>
         <Row className="justify-content-center g-4">
-          <Col xs={12} md={6} lg={4}>
-            <div className="trainers">
-              <div className="d-flex justify-content-center ">
-                <img src={photo2} alt="trainer" className="w-50 graytrain" />
-              </div>
-              <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
-                <h5 className="fw-bold text-center ">NAME SURNAME</h5>
-                <p className="text-center fw-semibold opacity-50">
-                  Crossfit Trainer
-                </p>
-              </div>
-            </div>
-          </Col>
-          <Col xs={12} md={6} lg={4}>
-            <div className="trainers">
-              <div className="d-flex justify-content-center ">
-                <img src={photo2} alt="trainer" className="w-50 graytrain" />
-              </div>
-              <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
-                <h5 className="fw-bold text-center ">NAME SURNAME</h5>
-                <p className="text-center fw-semibold opacity-50">
-                  Crossfit Trainer
-                </p>
-              </div>
-            </div>
-          </Col>
-          <Col xs={12} md={6} lg={4}>
-            <div className="trainers">
-              <div className="d-flex justify-content-center ">
-                <img src={photo2} alt="trainer" className="w-50 graytrain" />
-              </div>
-              <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
-                <h5 className="fw-bold text-center ">NAME SURNAME</h5>
-                <p className="text-center fw-semibold opacity-50">
-                  Crossfit Trainer
-                </p>
-              </div>
-            </div>
-          </Col>
+          {trainers === null && (
+            <Col className="mt-5 d-flex justify-content-center align-items-center">
+              <Spinner animation="border" variant="primary"></Spinner>
+            </Col>
+          )}
+          {trainers !== null && (
+            <>
+              <Col xs={12} md={6} lg={4}>
+                <div className="trainers">
+                  <div className="d-flex justify-content-center ">
+                    <img
+                      src={trainers[0].avatar}
+                      alt="trainer"
+                      className="w-50 graytrain"
+                    />
+                  </div>
+                  <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
+                    <h5 className="fw-bold text-center ">
+                      {trainers[0].name} {trainers[0].surname}
+                    </h5>
+                    <p className="text-center fw-semibold opacity-50">
+                      Crossfit Trainer
+                    </p>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={12} md={6} lg={4}>
+                <div className="trainers">
+                  <div className="d-flex justify-content-center ">
+                    <img
+                      src={trainers[1].avatar}
+                      alt="trainer"
+                      className="w-50 graytrain"
+                    />
+                  </div>
+                  <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
+                    <h5 className="fw-bold text-center ">
+                      {' '}
+                      {trainers[1].name} {trainers[1].surname}
+                    </h5>
+                    <p className="text-center fw-semibold opacity-50">
+                      Crossfit Trainer
+                    </p>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={12} md={6} lg={4}>
+                <div className="trainers">
+                  <div className="d-flex justify-content-center ">
+                    <img
+                      src={trainers[2].avatar}
+                      alt="trainer"
+                      className="w-50 graytrain"
+                    />
+                  </div>
+                  <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
+                    <h5 className="fw-bold text-center ">
+                      {' '}
+                      {trainers[2].name} {trainers[2].surname}
+                    </h5>
+                    <p className="text-center fw-semibold opacity-50">
+                      Crossfit Trainer
+                    </p>
+                  </div>
+                </div>
+              </Col>
+            </>
+          )}
         </Row>
         <Row className="justify-content-end align-items-center text-end  mt-5 mb-4 ">
           <Col xs={5} sm={6} lg={9}>
@@ -557,45 +612,46 @@ const Homepage = () => {
         <h5 className="fw-bold mb-4 text-center   pt-5 mt-xl-0">REVIEWS</h5>
         <Row className="justify-content-center">
           <Carousel className="w-75">
-            <Carousel.Item>
-              <div className="divouterrew">
-                <div className="divreview">
-                  {' '}
-                  <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
-                    </p>
-                  </Carousel.Caption>
-                </div>
-              </div>
-            </Carousel.Item>
-            <Carousel.Item>
-              <div className="divouterrew">
-                <div className="divreview">
-                  {' '}
-                  <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </Carousel.Caption>
-                </div>
-              </div>
-            </Carousel.Item>
-            <Carousel.Item>
-              <div className="divouterrew">
-                <div className="divreview">
-                  <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>
-                      Praesent commodo cursus magna, vel scelerisque nisl
-                      consectetur.
-                    </p>
-                  </Carousel.Caption>
-                </div>
-              </div>
-            </Carousel.Item>
+            {reviews === null && (
+              <Col className="mt-5 d-flex justify-content-center align-items-center">
+                <Spinner animation="border" variant="primary"></Spinner>
+              </Col>
+            )}
+            {reviews !== null &&
+              reviews.content.slice(0, 6).map((review) => {
+                return (
+                  <>
+                    <Carousel.Item key={review.id}>
+                      <div className="divouterrew">
+                        <div className="divreview">
+                          {' '}
+                          <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>
+                              Nulla vitae elit libero, a pharetra augue mollis
+                              interdum.
+                            </p>
+                          </Carousel.Caption>
+                        </div>
+                      </div>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <div className="divouterrew">
+                        <div className="divreview">
+                          {' '}
+                          <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing
+                              elit.
+                            </p>
+                          </Carousel.Caption>
+                        </div>
+                      </div>
+                    </Carousel.Item>
+                  </>
+                )
+              })}
           </Carousel>
         </Row>
       </Container>
