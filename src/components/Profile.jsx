@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   ACCESS_TOKEN,
+  GET_ROLE,
   getMe,
   getMyReservations,
   getMyReviews,
@@ -15,6 +16,34 @@ const Profile = () => {
   const initialForm = {
     heightValue: '',
     weightValue: '',
+  }
+
+  const [currentFile, setCurrentFile] = useState(null)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (currentFile) {
+      const formData = new FormData()
+      formData.append('avatar', currentFile)
+      try {
+        const response = await fetch('http://localhost:3001/users/me/upload', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: formData,
+        })
+        if (response.ok) {
+          console.log('uploaded')
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setTimeout(() => {
+          dispatch(getMe(accessToken))
+        }, '1000')
+      }
+    } else console.log('no file selected')
   }
 
   const accessToken = useSelector((state) => state.authReducer.accessToken)
@@ -123,43 +152,65 @@ const Profile = () => {
                 <p>*******</p>
                 <p>{user.birthDate}</p>
               </Col>
-              <div>
-                <p className="fw-bold  mb-1 mt-5">change avatar</p>
-                <Link
-                  className="text-black link-underline link-underline-opacity-0"
-                  to={'/update'}
-                >
-                  <p className="fw-bold  my-1">update info</p>
-                </Link>
-
-                <Link
-                  className="text-black link-underline link-underline-opacity-0"
-                  to={'/password'}
-                >
-                  <p className="fw-bold  my-1">change password</p>
-                </Link>
-                <Link
-                  className="text-black link-underline link-underline-opacity-0"
-                  to={'/login'}
-                >
-                  <p
-                    onClick={() => {
-                      dispatch({
-                        type: ACCESS_TOKEN,
-                        payload: '',
-                      })
+              <Form
+                onSubmit={(e) => {
+                  handleSubmit(e)
+                }}
+              >
+                <Form.Group controlId="formFileSm" className="mb-3">
+                  <Form.Label className="fw-bold  mb-1 mt-5">
+                    change avatar
+                  </Form.Label>
+                  <Form.Control
+                    type="file"
+                    size="sm"
+                    className="d-none"
+                    onChange={(e) => {
+                      setCurrentFile(e.target.files[0])
                     }}
-                    className="fw-bold  mb-3"
-                  >
-                    LOGOUT <i className="bi bi-person-down"></i>
-                  </p>
-                </Link>
-              </div>
+                  />
+                  <Button type="submit"> submit</Button>
+                </Form.Group>
+              </Form>
+
+              <Link
+                className=" text-black link-underline link-underline-opacity-0"
+                to={'/update'}
+              >
+                <p className="fw-bold  my-1">update info</p>
+              </Link>
+
+              <Link
+                className="text-black link-underline link-underline-opacity-0"
+                to={'/password'}
+              >
+                <p className="fw-bold  my-1">change password</p>
+              </Link>
+              <Link
+                className="text-black link-underline link-underline-opacity-0"
+                to={'/login'}
+              >
+                <p
+                  onClick={() => {
+                    dispatch({
+                      type: ACCESS_TOKEN,
+                      payload: '',
+                    })
+                    dispatch({
+                      type: GET_ROLE,
+                      payload: null,
+                    })
+                  }}
+                  className="fw-bold  mb-3"
+                >
+                  LOGOUT <i className="bi bi-person-down"></i>
+                </p>
+              </Link>
             </Row>
           </Col>
           <hr className="d-lg-none" />
 
-          <Col xs={12} lg={6} xl={4} className="text-center mt-4 mt-lg-0 ">
+          <Col xs={12} lg={6} xl={4} className="text-center mt-4 mt-lg-5 ">
             <h2 className="text-center fw-bold mb-5">
               {' '}
               Calculate your <span className="text-primary">BMI</span>!
@@ -218,36 +269,77 @@ const Profile = () => {
             </Form>
           </Col>
           <hr />
-          <Col xs={12} lg={4} className="mb-4 mb-md-0">
-            <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0 ">
+          <Col
+            xs={12}
+            lg={4}
+            className="mb-4 mb-md-0 border-end border-start border-1 px-3 "
+          >
+            <h2 className="fw-bold mb-4 text-center  mt-xl-0 ">
               Your Reviews:
             </h2>
             {myReviews !== null &&
               myReviews.map((review) => {
                 return (
-                  <div
-                    key={review.id}
-                    id={review.id}
-                    className="d-flex justify-content-between"
-                  >
-                    <div>
+                  <div key={review.id}>
+                    <div id={review.id} className="text-center text-lg-start">
                       {' '}
                       <p className="fw-bold mb-0 text-center text-md-start ">
                         {review.title}
                       </p>
-                      <p className="mb-0 text-center text-md-start mb-4 mb-lg-0">
+                      <p className="mb-0 text-center text-md-start mb-1 mb-lg-0 ">
                         {review.description}
                       </p>
-                      <p className="mb-0 text-center text-md-start mb-4 mb-lg-0">
-                        {review.rating}
+                      <p className="mb-0 text-center text-md-start mb-4 mb-lg-2">
+                        {[1, 2, 3, 4, 5].map((value) => (
+                          <i
+                            key={value}
+                            className={
+                              value <= review.rating
+                                ? 'bi bi-star-fill text-primary  me-1 fs-6 revRating'
+                                : 'bi bi-star text-primary  fs-6 revRating'
+                            }
+                          ></i>
+                        ))}
                       </p>
+                      <Button
+                        className=" px-3 text-white rounded-0 mb-3 "
+                        onClick={async (e) => {
+                          console.log(e.target.closest('div').id)
+                          try {
+                            const response = await fetch(
+                              `
+                    http://localhost:3001/reviews/${
+                      e.target.closest('div').id
+                    }`,
+                              {
+                                method: 'DELETE',
+                                headers: {
+                                  Authorization: `Bearer ${accessToken}`,
+                                },
+                              }
+                            )
+                            if (response.ok) {
+                              dispatch(getMyReviews(accessToken))
+                            }
+                          } catch (error) {
+                            console.log(error)
+                          }
+                        }}
+                      >
+                        {' '}
+                        <i className="bi bi-calendar2-x"></i>
+                      </Button>
                     </div>
                   </div>
                 )
               })}
           </Col>
-          <Col xs={12} lg={4} className="mb-4 mb-md-0">
-            <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">
+          <Col
+            xs={12}
+            lg={4}
+            className="mb-4 mb-md-0 border-end border-start border-1 px-3"
+          >
+            <h2 className="fw-bold mb-4 text-center   mt-xl-0">
               Your Subscriptions:
             </h2>
             {mySubs !== null &&
@@ -256,7 +348,7 @@ const Profile = () => {
                   <div
                     key={sub.id}
                     id={sub.id}
-                    className="d-flex justify-content-between"
+                    className="text-center text-lg-start"
                   >
                     <div>
                       <p className="fw-bold mb-0 text-center text-md-start">
@@ -272,8 +364,12 @@ const Profile = () => {
                 )
               })}
           </Col>
-          <Col xs={12} lg={4} className="mb-4 mb-md-0">
-            <h2 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">
+          <Col
+            xs={12}
+            lg={4}
+            className="mb-4 mb-md-0 border-end border-start border-1 px-3"
+          >
+            <h2 className="fw-bold mb-4 text-center   mt-xl-0">
               Your Reservations:
             </h2>
             {myReservations !== null &&
@@ -282,7 +378,7 @@ const Profile = () => {
                   <div
                     key={reservation.id}
                     id={reservation.id}
-                    className="d-flex justify-content-between"
+                    className="text-center text-lg-start"
                   >
                     <div>
                       <p className="fw-bold mb-1 text-center text-md-start ">

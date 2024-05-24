@@ -9,6 +9,7 @@ function CustomNavbar() {
   const location = useLocation().pathname
 
   const token = useSelector((state) => state.authReducer.accessToken)
+  const role = useSelector((state) => state.userReducer.role)
 
   return (
     <Navbar
@@ -67,10 +68,20 @@ function CustomNavbar() {
             >
               <img src={logo} width={300} alt="logo" />
             </Link>
-            <Link className="nav-link" to="/about">
+            <Link
+              className={
+                location === '/about' ? 'nav-link active ' : 'nav-link'
+              }
+              to="/about"
+            >
               ABOUT US
             </Link>
-            <Link className="nav-link" to="/contacts">
+            <Link
+              className={
+                location === '/contacts' ? 'nav-link active ' : 'nav-link'
+              }
+              to="/contacts"
+            >
               CONTACT
             </Link>
             <Link
@@ -86,6 +97,15 @@ function CustomNavbar() {
               <i className="bi bi-person-up me-1"></i>
               {token !== '' ? 'PROFILE' : 'LOGIN'}
             </Link>
+            {role === 'ADMIN' && (
+              <Link
+                className={
+                  location === '/dashboard' ? 'nav-link active' : 'nav-link '
+                }
+              >
+                | ADMIN PAGE
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

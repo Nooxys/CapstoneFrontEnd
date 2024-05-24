@@ -20,7 +20,7 @@ import custom from '../assets/custom.png'
 import photo from '../assets/compress-strong-man-training-gym-min-scaled.webp'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllReviews, getSubs, getTrainers } from '../redux/actions'
+import { getAllReviews, getMe, getSubs, getTrainers } from '../redux/actions'
 
 const Homepage = () => {
   const dispatch = useDispatch()
@@ -28,6 +28,7 @@ const Homepage = () => {
   const subs = useSelector((state) => state.subReducer.subs)
   const user = useSelector((state) => state.userReducer.user)
   const reviews = useSelector((state) => state.reviewReducer.reviews)
+  const token = useSelector((state) => state.authReducer.accessToken)
 
   const initialForm = {
     heightValue: '',
@@ -73,6 +74,7 @@ const Homepage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    dispatch(getMe(token))
     dispatch(getTrainers())
     dispatch(getSubs())
     dispatch(getAllReviews())

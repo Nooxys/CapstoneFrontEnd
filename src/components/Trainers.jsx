@@ -70,6 +70,7 @@ const Trainers = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+
     dispatch(getTrainers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

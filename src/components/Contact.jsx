@@ -25,7 +25,7 @@ const Contact = () => {
   const dispatch = useDispatch()
   const token = useSelector((state) => state.authReducer.accessToken)
   const newReview = useSelector((state) => state.reviewReducer.newReviewOk)
-  const newReviwErrors = useSelector(
+  const newReviewErrors = useSelector(
     (state) => state.reviewReducer.newReviewErrors
   )
 
@@ -167,8 +167,8 @@ const Contact = () => {
                 id="initialForm"
                 onSubmit={(e) => {
                   e.preventDefault()
+                  dispatch(addReview(token, form))
                   setForm(initialForm)
-                  dispatch(addReview(token, initialForm))
                 }}
                 className=" px-4 mb-5 text-white"
               >
@@ -217,21 +217,24 @@ const Contact = () => {
                     ></i>
                   ))}
                 </Form.Group>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="text-white  rounded-0 fw-bold"
-                  form="initialForm"
-                >
-                  SEND
-                </Button>
+                {!newReview && (
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    className="text-white  rounded-0 fw-bold"
+                    form="initialForm"
+                  >
+                    SEND
+                  </Button>
+                )}
+
                 {newReview && (
                   <div className="mb-3 text-center text-white">
                     Review sent!
                   </div>
                 )}
-                {newReview === false && newReviwErrors && (
-                  <div className="text-primary my-3">{newReviwErrors}</div>
+                {newReviewErrors && (
+                  <div className="text-primary my-3">{newReviewErrors}</div>
                 )}
               </Form>
             </Col>

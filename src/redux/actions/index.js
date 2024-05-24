@@ -30,6 +30,7 @@ export const IS_LOADING_REV = 'IS_LOADING_REV'
 export const GET_MY_REVIEWS = 'GET_MY_REVIEWS'
 export const POST_REVIEW_OK = 'POST_REVIEW_OK'
 export const POST_REVIEW_ERRORS = 'POST_REVIEW_ERRORS'
+export const GET_ROLE = 'GET_ROLE'
 
 // ACTION CREATORS --------------------------------------------------------------------------------------------------------
 // Per la rimozione degli elementi da un array solitamente si utilizza l'indice dell'elemento come parametro
@@ -145,6 +146,10 @@ export const getMe = (accessToken) => {
         dispatch({
           type: GET_ME,
           payload: data,
+        })
+        dispatch({
+          type: GET_ROLE,
+          payload: data.role,
         })
       }
     } catch (error) {
@@ -486,7 +491,7 @@ export const addReview = (accessToken, payload) => {
           payload: true,
         })
         dispatch({
-          type: POST_RESERVATION_ERRORS,
+          type: POST_REVIEW_ERRORS,
           payload: null,
         })
       } else {

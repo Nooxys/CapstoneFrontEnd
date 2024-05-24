@@ -1,5 +1,6 @@
 import {
   GET_ME,
+  GET_ROLE,
   GET_TRAINERS,
   IS_LOADING,
   PASSWORD_ERRORS,
@@ -16,6 +17,7 @@ const initialState = {
   passwordOk: null,
   passwordErrors: null,
   trainers: null,
+  role: null,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -60,6 +62,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         trainers: action.payload,
+      }
+
+    case GET_ROLE:
+      return {
+        ...state,
+        role: action.payload,
       }
 
     default:
