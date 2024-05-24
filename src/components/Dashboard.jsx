@@ -130,7 +130,46 @@ const Dashboard = () => {
                           setCurrentFile(e.target.files[0])
                         }}
                       />
-                      <Button type="submit"> submit</Button>
+                      <div
+                        id={sub.id}
+                        className="d-flex justify-content-around"
+                      >
+                        <Button
+                          className=" px-3 text-white rounded-0 mb-3 "
+                          type="submit"
+                        >
+                          {' '}
+                          submit
+                        </Button>
+                        <Button
+                          className=" px-3 text-white rounded-0 mb-3 "
+                          onClick={async (e) => {
+                            console.log(e.target.closest('div').id)
+                            try {
+                              const response = await fetch(
+                                `
+                    http://localhost:3001/subscriptions/${
+                      e.target.closest('div').id
+                    }`,
+                                {
+                                  method: 'DELETE',
+                                  headers: {
+                                    Authorization: `Bearer ${token}`,
+                                  },
+                                }
+                              )
+                              if (response.ok) {
+                                dispatch(getSubs())
+                              }
+                            } catch (error) {
+                              console.log(error)
+                            }
+                          }}
+                        >
+                          {' '}
+                          Delete
+                        </Button>
+                      </div>
                     </Form.Group>
                   </Form>{' '}
                 </Col>
@@ -138,6 +177,7 @@ const Dashboard = () => {
             })}
         </Row>
       </Row>
+      <hr />
       <Row>
         <h3 className="text-center fw-bold mt-5">Create Subscription</h3>
       </Row>
