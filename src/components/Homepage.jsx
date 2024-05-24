@@ -26,7 +26,6 @@ const Homepage = () => {
   const dispatch = useDispatch()
   const trainers = useSelector((state) => state.userReducer.trainers)
   const subs = useSelector((state) => state.subReducer.subs)
-  const user = useSelector((state) => state.userReducer.user)
   const reviews = useSelector((state) => state.reviewReducer.reviews)
   const token = useSelector((state) => state.authReducer.accessToken)
 

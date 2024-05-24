@@ -13,6 +13,7 @@ import Subscriptions from './components/Subscriptions'
 import Trainers from './components/Trainers'
 import ChangeInfo from './components/ChangeInfo'
 import SubDetails from './components/SubDetails'
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             </header>
             <Routes>
               <Route element={<Homepage />} path="/" />
+              <Route element={<Dashboard />} path="/dashboard" />
               <Route element={<LoginPage />} path="login" />
               <Route element={<RegisterPage />} path="register" />
               <Route element={<AboutUs />} path="about" />

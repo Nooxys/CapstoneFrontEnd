@@ -31,6 +31,8 @@ export const GET_MY_REVIEWS = 'GET_MY_REVIEWS'
 export const POST_REVIEW_OK = 'POST_REVIEW_OK'
 export const POST_REVIEW_ERRORS = 'POST_REVIEW_ERRORS'
 export const GET_ROLE = 'GET_ROLE'
+export const POST_SUB_OK = 'POST_SUB_OK'
+export const POST_SUB_ERRORS = 'POST_SUB_ERRORS'
 
 // ACTION CREATORS --------------------------------------------------------------------------------------------------------
 // Per la rimozione degli elementi da un array solitamente si utilizza l'indice dell'elemento come parametro
@@ -378,6 +380,39 @@ export const getMySubs = (accessToken) => {
         type: IS_LOADING_SUB,
         payload: false,
       })
+    }
+  }
+}
+
+export const addSub = (token, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(startingURL + '/subscriptions', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      if (response.ok) {
+        dispatch({
+          type: POST_SUB_OK,
+          payload: true,
+        })
+        dispatch({
+          type: POST_SUB_ERRORS,
+          payload: null,
+        })
+      } else {
+        const data = await response.json()
+        dispatch({
+          type: POST_SUB_ERRORS,
+          payload: data.message,
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }

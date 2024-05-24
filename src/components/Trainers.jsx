@@ -60,7 +60,6 @@ const Trainers = () => {
   const dispatch = useDispatch()
   const token = useSelector((state) => state.authReducer.accessToken)
   const trainers = useSelector((state) => state.userReducer.trainers)
-  const user = useSelector((state) => state.userReducer.user)
   const addRes = useSelector(
     (state) => state.reservationReducer.newReservationOk
   )

@@ -127,7 +127,7 @@ const Profile = () => {
               <img
                 src={user.avatar}
                 alt="user avatar"
-                className="rounded-circle ms-4 mt-4 mt-md-0"
+                className="rounded-circle ms-4 mt-4 mt-md-0 profileImg"
                 width={80}
                 height={80}
               />
@@ -172,40 +172,41 @@ const Profile = () => {
                   <Button type="submit"> submit</Button>
                 </Form.Group>
               </Form>
-
-              <Link
-                className=" text-black link-underline link-underline-opacity-0"
-                to={'/update'}
-              >
-                <p className="fw-bold  my-1">update info</p>
-              </Link>
-
-              <Link
-                className="text-black link-underline link-underline-opacity-0"
-                to={'/password'}
-              >
-                <p className="fw-bold  my-1">change password</p>
-              </Link>
-              <Link
-                className="text-black link-underline link-underline-opacity-0"
-                to={'/login'}
-              >
-                <p
-                  onClick={() => {
-                    dispatch({
-                      type: ACCESS_TOKEN,
-                      payload: '',
-                    })
-                    dispatch({
-                      type: GET_ROLE,
-                      payload: null,
-                    })
-                  }}
-                  className="fw-bold  mb-3"
+              <Col xs={12} md={3}>
+                <Link
+                  className=" text-black link-underline link-underline-opacity-0"
+                  to={'/update'}
                 >
-                  LOGOUT <i className="bi bi-person-down"></i>
-                </p>
-              </Link>
+                  <p className="fw-bold  my-1">update info</p>
+                </Link>
+
+                <Link
+                  className="text-black link-underline link-underline-opacity-0"
+                  to={'/password'}
+                >
+                  <p className="fw-bold  my-1">change password</p>
+                </Link>
+                <Link
+                  className="text-black link-underline link-underline-opacity-0"
+                  to={'/login'}
+                >
+                  <p
+                    onClick={() => {
+                      dispatch({
+                        type: ACCESS_TOKEN,
+                        payload: '',
+                      })
+                      dispatch({
+                        type: GET_ROLE,
+                        payload: null,
+                      })
+                    }}
+                    className="fw-bold  mb-3"
+                  >
+                    LOGOUT <i className="bi bi-person-down"></i>
+                  </p>
+                </Link>
+              </Col>
             </Row>
           </Col>
           <hr className="d-lg-none" />

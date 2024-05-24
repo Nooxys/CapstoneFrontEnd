@@ -189,4 +189,8 @@ footer {
   cursor: pointer;
 }
 
+.profileImg {
+  object-fit: cover;
+}
+
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

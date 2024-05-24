@@ -7,10 +7,7 @@ import { useEffect } from 'react'
 import { getSubs } from '../redux/actions'
 const Subscriptions = () => {
   const dispatch = useDispatch()
-  const token = useSelector((state) => state.authReducer.accessToken)
   const subs = useSelector((state) => state.subReducer.subs)
-  const isLoading = useSelector((state) => state.subReducer.isLoading)
-
   const navigate = useNavigate()
 
   useEffect(() => {

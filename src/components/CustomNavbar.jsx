@@ -102,8 +102,9 @@ function CustomNavbar() {
                 className={
                   location === '/dashboard' ? 'nav-link active' : 'nav-link '
                 }
+                to="/dashboard"
               >
-                | ADMIN PAGE
+                ADMIN
               </Link>
             )}
           </Nav>

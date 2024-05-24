@@ -5,6 +5,8 @@ import {
   GET_SUB,
   GET_SUBS,
   IS_LOADING_SUB,
+  POST_SUB_ERRORS,
+  POST_SUB_OK,
 } from '../actions'
 
 const initialState = {
@@ -14,6 +16,8 @@ const initialState = {
   assignOK: false,
   assignErrors: null,
   mySubs: null,
+  newSubOk: false,
+  newSubErrors: null,
 }
 
 const subReducer = (state = initialState, action) => {
@@ -52,6 +56,18 @@ const subReducer = (state = initialState, action) => {
       return {
         ...state,
         mySubs: action.payload,
+      }
+
+    case POST_SUB_OK:
+      return {
+        ...state,
+        newSubOk: action.payload,
+      }
+
+    case POST_SUB_ERRORS:
+      return {
+        ...state,
+        newSubErrors: action.payload,
       }
 
     default:
