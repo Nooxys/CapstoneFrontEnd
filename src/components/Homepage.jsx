@@ -17,10 +17,11 @@ import gains from '../assets/gains.png'
 import rest from '../assets/rest.png'
 import friendly from '../assets/friendly.png'
 import custom from '../assets/custom.png'
-import photo from '../assets/compress-strong-man-training-gym-min-scaled.webp'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllReviews, getMe, getSubs, getTrainers } from '../redux/actions'
+import redCircle from '../assets/red-circle.svg'
+import baffo from '../assets/baffo.svg'
 
 const Homepage = () => {
   const dispatch = useDispatch()
@@ -83,17 +84,27 @@ const Homepage = () => {
   return (
     <>
       <Container fluid className="p-0 border-bottom border-primary border-3">
-        <div className="hero p-0 d-flex flex-column justify-content-evenly  position position-relative ">
-          <Row>
-            <Col xs={12} md={4} className="d-flex flex-column ">
-              <h4 className="text-white ps-5">BUILD YOUR BODY</h4>
+        <div className="hero py-5 d-flex flex-column justify-content-between ">
+          <Row className=" ">
+            <Col xs={12} md={4}>
+              <div className="position-relative z-3 ms-2 d-flex justify-content-start  text-white">
+                <img
+                  src={baffo}
+                  alt="baffo"
+                  className="position-absolute whiteBaffo"
+                  width={320}
+                />
+                <h4 className=" ms-5 pt-3 mb-4 mt-xl-0 z-2 position-relative text-black">
+                  BUILD YOUR BODY
+                </h4>
+              </div>
               <h1 className="text-white ps-5 mt-4 fw-bold">MAKE IT FIT </h1>
               <h1 className="text-white ps-5 mt-3 mb-5 ">& STRONG </h1>
             </Col>
           </Row>
           <Row>
             <Col xs={12} md={4} className="d-flex flex-column ">
-              <h4 className="text-white ps-5">TAKE A TOUR</h4>
+              <h4 className="text-white ps-5 fst-italic">- TAKE A TOUR -</h4>
               <Link to={'/subscriptions'}>
                 <Button className="text-white rounded-0 fw-bold py-3 px-4 my-2 customButton ms-5 ">
                   SUBSCRIPTIONS <i className="bi bi-arrow-right"></i>
@@ -126,9 +137,17 @@ const Homepage = () => {
       <Container className="my-5 ">
         <Row className="justify-content-center justify-content-md-around my-5">
           <Col xs={10} md={6}>
-            <h4 className="fw-bold mb-4 text-center text-md-start  mt-lg-5 mt-xl-0">
-              WHY NOCTFIT?
-            </h4>
+            <div className="position-relative z-3 d-flex justify-content-center text-white">
+              <img
+                src={baffo}
+                alt="baffo"
+                className="position-absolute z-"
+                width={270}
+              />
+              <h4 className="fw-bold pt-2 mb-4 mt-xl-0 z-2 position-relative">
+                WHY NOCTFIT?
+              </h4>
+            </div>
             <h2 className="fw-bold mb-4  text-center text-md-start">
               We Can Give You All The Tools To Success
             </h2>
@@ -185,14 +204,30 @@ const Homepage = () => {
                 <h5 className="fw-bold mt-3">SAFE GYM MACHINES</h5>
               </Col>
             </Row>
-            <Link to={'/about'}>
-              <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">
-                ABOUT US <i className="bi bi-arrow-right"></i>
-              </Button>
-            </Link>
+            <Row className="text-center text-lg-start">
+              <Link to={'/about'}>
+                <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton mb-5 ">
+                  ABOUT US <i className="bi bi-arrow-right"></i>
+                </Button>
+              </Link>
+            </Row>
           </Col>
-          <Col xs={10} md={5} className="d-none d-md-block mb-5 mt-5 mt-lg-0">
-            <img src={athlete} alt="athlete_celebrating" width={350} />
+          <Col
+            xs={10}
+            md={5}
+            className="d-none d-md-block mb-5 mt-5 mt-lg-0 position-relative"
+          >
+            <img
+              src={athlete}
+              alt="athlete_celebrating "
+              width={350}
+              className="position-absolute z-3"
+            />
+            <img
+              src={redCircle}
+              alt="red circle"
+              className="z-1 redCircle position-absolute"
+            />
           </Col>
         </Row>
       </Container>
@@ -204,9 +239,17 @@ const Homepage = () => {
               <img src={athlete} alt="athlete_celebrating" width={350} />
             </Col>
             <Col xs={10} lg={6}>
-              <h4 className="fw-bold mb-4 text-center text-md-start  mt-lg-5 mt-xl-0">
-                WE ARE A FAMILY
-              </h4>
+              <div className="position-relative z-3 d-flex justify-content-center text-black">
+                <img
+                  src={baffo}
+                  alt="baffo"
+                  className="position-absolute whiteBaffo"
+                  width={330}
+                />
+                <h4 className="fw-bold pt-3 mb-4 mt-xl-0 z-2 position-relative">
+                  WE ARE A FAMILY
+                </h4>
+              </div>
               <h2 className="fw-bold mb-4  text-center text-md-start">
                 Meet Fitness Experts And Join Them
               </h2>
@@ -309,9 +352,17 @@ const Homepage = () => {
         </Container>
       </div>
       <Container className="my-5">
-        <h5 className="fw-bold mb-4 text-center   pt-5 mt-xl-0">
-          OUR SUBSCRIPTIONS
-        </h5>
+        <div className="position-relative z-3 d-flex justify-content-center text-white">
+          <img
+            src={baffo}
+            alt="baffo"
+            className="position-absolute "
+            width={320}
+          />
+          <h5 className="fw-bold pt-3 mb-4 mt-xl-0 z-2 position-relative">
+            OUR SUBSCRIPTIONS
+          </h5>
+        </div>
         <h2 className="fw-bold text-center">
           We Offer Many Flexible Susbscriptions
         </h2>
@@ -326,14 +377,17 @@ const Homepage = () => {
               <Col xs={12} lg={6}>
                 <Card>
                   <Card.Img
-                    src={photo}
+                    src={subs.content[0].cover}
                     alt="Card image"
                     height={350}
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Card.Title>{subs.content[0].title}</Card.Title>
+                    <Card.Text>
+                      € {subs.content[0].price} -{' '}
+                      {subs.content[0].daysOfDuration} Days
+                    </Card.Text>
                     <Button
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
@@ -346,14 +400,15 @@ const Homepage = () => {
               <Col xs={12} lg={3}>
                 <Card>
                   <Card.Img
-                    src={photo}
+                    src={subs.content[1].cover}
                     alt="Card image"
                     height={350}
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    {subs.content[1].price} - {subs.content[1].daysOfDuration}{' '}
+                    Days
                     <Button
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
@@ -366,14 +421,15 @@ const Homepage = () => {
               <Col xs={12} lg={3}>
                 <Card>
                   <Card.Img
-                    src={photo}
+                    src={subs.content[2].cover}
                     alt="Card image"
                     height={350}
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    {subs.content[2].price} - {subs.content[2].daysOfDuration}{' '}
+                    Days
                     <Button
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
@@ -386,14 +442,15 @@ const Homepage = () => {
               <Col xs={12} lg={3}>
                 <Card>
                   <Card.Img
-                    src={photo}
+                    src={subs.content[3].cover}
                     alt="Card image"
                     height={350}
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    {subs.content[3].price} - {subs.content[3].daysOfDuration}{' '}
+                    Days
                     <Button
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
@@ -406,14 +463,15 @@ const Homepage = () => {
               <Col xs={12} lg={3}>
                 <Card>
                   <Card.Img
-                    src={photo}
+                    src={subs.content[4].cover}
                     alt="Card image"
                     height={350}
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub ">
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    {subs.content[4].price} - {subs.content[4].daysOfDuration}{' '}
+                    Days
                     <Button
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
@@ -426,14 +484,15 @@ const Homepage = () => {
               <Col xs={12} lg={6}>
                 <Card>
                   <Card.Img
-                    src={photo}
+                    src={subs.content[5].cover}
                     alt="Card image"
                     height={350}
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>Card title</Card.Title>
-                    <Card.Text>placeholder - placeholder</Card.Text>
+                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    {subs.content[5].price} - {subs.content[5].daysOfDuration}{' '}
+                    Days
                     <Button
                       className="
               mb-2 text-white rounded rounded-0 fw-bold"
@@ -460,7 +519,17 @@ const Homepage = () => {
         </Row>
 
         <hr className="mb-5" />
-        <h5 className="fw-bold mb-4 text-center   ">OUR TRAINERS</h5>
+        <div className="position-relative z-3 d-flex justify-content-center text-white">
+          <img
+            src={baffo}
+            alt="baffo"
+            className="position-absolute "
+            width={320}
+          />
+          <h5 className="fw-bold pt-3 mb-4 mt-xl-0 z-2 position-relative">
+            OUR TRAINERS
+          </h5>
+        </div>
         <h2 className="fw-bold text-center mb-5">Team Of Expert Trainers</h2>
         <Row className="justify-content-center g-4">
           {trainers === null && (
@@ -477,6 +546,7 @@ const Homepage = () => {
                       src={trainers[0].avatar}
                       alt="trainer"
                       className="w-50 graytrain"
+                      style={{ minHeight: 370 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
@@ -496,6 +566,7 @@ const Homepage = () => {
                       src={trainers[1].avatar}
                       alt="trainer"
                       className="w-50 graytrain"
+                      style={{ minHeight: 370 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
@@ -516,6 +587,7 @@ const Homepage = () => {
                       src={trainers[2].avatar}
                       alt="trainer"
                       className="w-50 graytrain"
+                      style={{ minHeight: 370 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
@@ -610,50 +682,61 @@ const Homepage = () => {
         </Container>
       </div>
       <Container className="my-5">
-        <h5 className="fw-bold mb-4 text-center   pt-5 mt-xl-0">REVIEWS</h5>
-        <Row className="justify-content-center">
-          <Carousel className="w-75">
-            {reviews === null && (
-              <Col className="mt-5 d-flex justify-content-center align-items-center">
-                <Spinner animation="border" variant="primary"></Spinner>
-              </Col>
-            )}
-            {reviews !== null &&
-              reviews.content.slice(0, 6).map((review) => {
-                return (
-                  <>
+        <div className="position-relative z-3 d-flex justify-content-center text-white mb-3">
+          <img
+            src={baffo}
+            alt="baffo"
+            className="position-absolute  "
+            width={250}
+          />
+          <h5 className="fw-bold pt-2 mb-4 mt-xl-0 z-2 position-relative">
+            REVIEWS
+          </h5>
+        </div>
+        <Row className="justify-content-center ">
+          <Col xs={12} md={8}>
+            <Carousel className="w-100">
+              {reviews === null && (
+                <Col className="mt-5 d-flex justify-content-center align-items-center">
+                  <Spinner animation="border" variant="primary"></Spinner>
+                </Col>
+              )}
+              {reviews !== null &&
+                reviews.content.slice(0, 6).map((review) => {
+                  return (
                     <Carousel.Item key={review.id}>
                       <div className="divouterrew">
                         <div className="divreview">
-                          {' '}
+                          <img
+                            src={review.user.avatar}
+                            alt="user_avatar"
+                            className="rounded-circle ms-5 mt-3  profileImg"
+                            width={120}
+                            height={120}
+                          />
                           <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>
-                              Nulla vitae elit libero, a pharetra augue mollis
-                              interdum.
+                            <h3>{review.title}</h3>
+                            <p>{review.description}</p>
+                            <p className="mb-0 text-center  mb-4 mb-lg-2">
+                              {[1, 2, 3, 4, 5].map((value) => (
+                                <i
+                                  key={value}
+                                  className={
+                                    value <= review.rating
+                                      ? 'bi bi-star-fill text-primary  me-1 fs-4 '
+                                      : 'bi bi-star text-primary  fs-4 '
+                                  }
+                                ></i>
+                              ))}
                             </p>
                           </Carousel.Caption>
                         </div>
                       </div>
                     </Carousel.Item>
-                    <Carousel.Item>
-                      <div className="divouterrew">
-                        <div className="divreview">
-                          {' '}
-                          <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit.
-                            </p>
-                          </Carousel.Caption>
-                        </div>
-                      </div>
-                    </Carousel.Item>
-                  </>
-                )
-              })}
-          </Carousel>
+                  )
+                })}
+            </Carousel>
+          </Col>
         </Row>
       </Container>
     </>

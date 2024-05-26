@@ -5,6 +5,8 @@ import athlete from '../assets/transparent-sports-fitness-exercise-workout-squat
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getSubs } from '../redux/actions'
+import baffo from '../assets/baffo.svg'
+
 const Subscriptions = () => {
   const dispatch = useDispatch()
   const subs = useSelector((state) => state.subReducer.subs)
@@ -19,7 +21,17 @@ const Subscriptions = () => {
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold my-5"> SUBSCRIPTIONS </h1>
+        <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
+          <img
+            src={baffo}
+            alt="baffo"
+            className="position-absolute z-"
+            width={470}
+          />
+          <h1 className="fw-bold pt-2 mb-4 mt-xl-0 z-2 position-relative pt-3">
+            SUBSCRIPTIONS
+          </h1>
+        </div>
 
         <hr />
         <Row className="justify-content-center justify-content-md-around my-4">

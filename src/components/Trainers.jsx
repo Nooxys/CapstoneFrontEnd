@@ -15,6 +15,7 @@ import {
   addReservation,
   getTrainers,
 } from '../redux/actions'
+import baffo from '../assets/baffo.svg'
 
 const Trainers = () => {
   // ------------------
@@ -84,10 +85,18 @@ const Trainers = () => {
 
   return (
     <Container className="mb-5">
-      <Row>
-        <h1 className="text-center fw-bold my-5"> PERSONAL TRAINERS </h1>
-        <hr />
-      </Row>
+      <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
+        <img
+          src={baffo}
+          alt="baffo"
+          className="position-absolute mt-2"
+          width={400}
+        />
+        <h1 className="fw-bold   mb-4 mt-xl-0 z-2 position-relative pt-3">
+          TRAINERS
+        </h1>
+      </div>
+      <hr />
       <Row className="mb-5">
         <h2 className="fw-bold   text-center">Discover Our Professionals!</h2>
         <p className="text-center">
@@ -111,6 +120,7 @@ const Trainers = () => {
                       src={trainer.avatar}
                       alt="trainer"
                       className="w-50 graytrain"
+                      style={{ minHeight: 370 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">

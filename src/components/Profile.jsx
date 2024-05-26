@@ -157,8 +157,8 @@ const Profile = () => {
                   handleSubmit(e)
                 }}
               >
-                <Form.Group controlId="formFileSm" className="mb-3">
-                  <Form.Label className="fw-bold  mb-1 mt-5">
+                <Form.Group controlId="formFileSm" className="2">
+                  <Form.Label className="fw-bold revRating mb-1 mt-5">
                     change avatar
                   </Form.Label>
                   <Form.Control
@@ -169,8 +169,14 @@ const Profile = () => {
                       setCurrentFile(e.target.files[0])
                     }}
                   />
-                  <Button type="submit"> submit</Button>
                 </Form.Group>
+                <Button
+                  className="text-white rounded-0 mb-3 fw-bold"
+                  type="submit"
+                >
+                  {' '}
+                  Change
+                </Button>
               </Form>
               <Col xs={12} md={3}>
                 <Link

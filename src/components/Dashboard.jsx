@@ -90,7 +90,7 @@ const Dashboard = () => {
         <Row>
           <h3 className="text-center fw-bold">Actives Subscriptions</h3>
           <h6 className="text-center fw-bold fst-italic ">
-            Click on the subscription to change the image
+            Click on the subscription to change the image, then press Submit
           </h6>
         </Row>
         <Row>
@@ -254,7 +254,7 @@ const Dashboard = () => {
                 <Button
                   variant="primary"
                   type="submit"
-                  className="text-white my-4 rounded-0 fw-bold "
+                  className="text-white ms-3 my-4 rounded-0 fw-bold "
                 >
                   SAVE
                 </Button>

@@ -116,6 +116,7 @@ footer {
 
 .graytrain {
   filter: grayscale(1);
+
   transition: all 0.3s ease 0s;
   cursor: pointer;
 }
@@ -191,6 +192,23 @@ footer {
 
 .profileImg {
   object-fit: cover;
+}
+
+.redCircle {
+  left: 180px;
+}
+
+.baffoHero {
+  background-image: url('../assets/baffo.svg');
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 53px;
+  width: 350px;
+}
+
+.whiteBaffo {
+  filter: brightness(0) invert(1);
 }
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

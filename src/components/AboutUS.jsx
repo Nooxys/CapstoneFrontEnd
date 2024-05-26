@@ -3,13 +3,23 @@ import athlete from '../assets/athlete_celebrating.png'
 import photo1 from '../assets/compress-strong-man-training-gym-min-scaled.webp'
 import photo2 from '../assets/reunion.webp'
 import { Link } from 'react-router-dom'
+import baffo from '../assets/baffo.svg'
+
 const AboutUs = () => {
   return (
     <Container className="mb-5">
-      <Row>
-        <h1 className="text-center fw-bold my-5"> ABOUT US </h1>
-        <hr />
-      </Row>
+      <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
+        <img
+          src={baffo}
+          alt="baffo"
+          className="position-absolute mt-2"
+          width={400}
+        />
+        <h1 className="fw-bold   mb-4 mt-xl-0 z-2 position-relative pt-3">
+          ABOUT US
+        </h1>
+      </div>
+      <hr />
 
       <Row className="justify-content-center justify-content-md-around my-4">
         <Col xs={10} md={6}>
