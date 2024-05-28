@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getSubs } from '../redux/actions'
 import baffo from '../assets/baffo.svg'
+import redCircle from '../assets/red-circle.svg'
 
 const Subscriptions = () => {
   const dispatch = useDispatch()
@@ -34,9 +35,9 @@ const Subscriptions = () => {
         </div>
 
         <hr />
-        <Row className="justify-content-center justify-content-md-around my-4">
-          <Col xs={10} md={6}>
-            <h4 className="fw-bold mb-4 text-center text-md-start mt-lg-5  ">
+        <Row className="justify-content-center justify-content-md-around my-4 ">
+          <Col xs={10} lg={6}>
+            <h4 className="fw-bold mb-4 text-center text-md-start mt-lg-2  ">
               For Every Need
             </h4>
             <h2 className="fw-bold mb-4  text-center text-md-start">
@@ -56,13 +57,28 @@ const Subscriptions = () => {
               that&apos;s right for you!
             </p>
             <Link to={'/trainers'}>
-              <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">
+              <Button className="text-white rounded-0 fw-bold py-3 px-4 mb-4 customButton ">
                 CHECK PT <i className="bi bi-arrow-right"></i>
               </Button>
             </Link>
           </Col>
-          <Col xs={10} md={5} className="d-none d-md-block mb-5">
-            <img src={athlete} alt="athlete_celebrating" width={450} />
+          <Col
+            xs={10}
+            md={5}
+            className="d-none d-lg-block mb-5 position-relative"
+          >
+            <img
+              src={athlete}
+              alt="athlete_celebrating "
+              width={400}
+              className="position-absolute z-3"
+            />
+            <img
+              src={redCircle}
+              alt="red circle"
+              width={250}
+              className="z-1 redCircleSubs position-absolute"
+            />
           </Col>
         </Row>
       </Row>

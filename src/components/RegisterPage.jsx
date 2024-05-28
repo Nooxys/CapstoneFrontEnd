@@ -157,7 +157,7 @@ const RegisterPage = () => {
               controlId="formBasicCheckbox"
             ></Form.Group>
             <Row className="justify-content-center">
-              <Col xs={4}>
+              <Col xs={4} md={5} lg={6} xl={4}>
                 <Button
                   variant="primary"
                   type="submit"

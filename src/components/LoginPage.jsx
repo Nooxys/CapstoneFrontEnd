@@ -97,12 +97,12 @@ const LoginPage = () => {
               className="mb-3"
               controlId="formBasicCheckbox"
             ></Form.Group>
-            <Row className="justify-content-center">
-              <Col xs={3}>
+            <Row className="justify-content-center ">
+              <Col xs={4} sm={3} md={4} xl={3} className="me-2">
                 <Button
                   variant="primary"
                   type="submit"
-                  className="text-white my-4 rounded-0 fw-bold"
+                  className="text-white  my-4 rounded-0 fw-bold"
                 >
                   LOGIN
                 </Button>

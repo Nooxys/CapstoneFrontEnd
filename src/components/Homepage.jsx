@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import {
   Button,
   Card,
@@ -5,10 +6,11 @@ import {
   Col,
   Container,
   Form,
+  Offcanvas,
   Row,
   Spinner,
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import athlete from '../assets/athlete_celebrating.png'
 import image1 from '../assets/pesi.png'
 import image2 from '../assets/pesi2.png'
@@ -22,8 +24,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllReviews, getMe, getSubs, getTrainers } from '../redux/actions'
 import redCircle from '../assets/red-circle.svg'
 import baffo from '../assets/baffo.svg'
+import weFamily from '../assets/we_are_a_family.png'
 
 const Homepage = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const trainers = useSelector((state) => state.userReducer.trainers)
   const subs = useSelector((state) => state.subReducer.subs)
@@ -74,7 +78,9 @@ const Homepage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    dispatch(getMe(token))
+    if (token !== '') {
+      dispatch(getMe(token))
+    }
     dispatch(getTrainers())
     dispatch(getSubs())
     dispatch(getAllReviews())
@@ -125,10 +131,18 @@ const Homepage = () => {
             >
               <h5 className="text-white ps-5 fw-bold">FOLLOW US</h5>
               <div className=" ms-4 d-flex justify-content-start   align-items-center justify-content-center justify-content-lg-start text-white ">
-                <i className="bi bi-facebook fs-3 mx-2 "></i>
-                <i className="bi bi-instagram fs-3  mx-2"></i>
-                <i className="bi bi-twitter-x fs-3  mx-2"></i>
-                <i className="bi bi-youtube fs-3 mx-2"></i>
+                <a href="https://www.facebook.com/">
+                  <i className="bi bi-facebook fs-3 mx-2 "></i>
+                </a>
+                <a href="https://www.instagram.com/">
+                  <i className="bi bi-instagram fs-3  mx-2"></i>
+                </a>
+                <a href="https://www.twitter.com/">
+                  <i className="bi bi-twitter-x fs-3  mx-2"></i>
+                </a>
+                <a href="https://www.twitter.com/">
+                  <i className="bi bi-youtube fs-3 mx-2"></i>
+                </a>
               </div>
             </Col>
           </Row>
@@ -136,7 +150,7 @@ const Homepage = () => {
       </Container>
       <Container className="my-5 ">
         <Row className="justify-content-center justify-content-md-around my-5">
-          <Col xs={10} md={6}>
+          <Col xs={10} lg={6}>
             <div className="position-relative z-3 d-flex justify-content-center text-white">
               <img
                 src={baffo}
@@ -215,7 +229,7 @@ const Homepage = () => {
           <Col
             xs={10}
             md={5}
-            className="d-none d-md-block mb-5 mt-5 mt-lg-0 position-relative"
+            className="d-none d-lg-block mb-5 mt-5 mt-lg-0 position-relative"
           >
             <img
               src={athlete}
@@ -235,8 +249,22 @@ const Homepage = () => {
       <div className="bg-danger text-white py-5 border-bottom border-top border-2 border-primary">
         <Container>
           <Row className="justify-content-center justify-content-md-around my-5">
-            <Col xs={10} lg={6} className="d-none d-lg-block mb-5">
-              <img src={athlete} alt="athlete_celebrating" width={350} />
+            <Col
+              xs={10}
+              lg={6}
+              className="d-none d-lg-block  position-relative pt-5 "
+            >
+              <img
+                src={weFamily}
+                alt="family "
+                width={400}
+                className="position-absolute z-3"
+              />
+              <img
+                src={redCircle}
+                alt="red circle"
+                className="z-1 whiteCircle position-absolute"
+              />
             </Col>
             <Col xs={10} lg={6}>
               <div className="position-relative z-3 d-flex justify-content-center text-black">
@@ -389,8 +417,11 @@ const Homepage = () => {
                       {subs.content[0].daysOfDuration} Days
                     </Card.Text>
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + subs.content[0].id)
+                      }}
                       className="
-              mb-2 text-white rounded rounded-0 fw-bold"
+            mb-2 text-white rounded rounded-0 fw-bold"
                     >
                       DETAILS <i className="bi bi-arrow-right"></i>
                     </Button>
@@ -406,12 +437,15 @@ const Homepage = () => {
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    <Card.Title>{subs.content[1].title}</Card.Title>€{' '}
                     {subs.content[1].price} - {subs.content[1].daysOfDuration}{' '}
                     Days
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + subs.content[1].id)
+                      }}
                       className="
-              mb-2 text-white rounded rounded-0 fw-bold"
+            mb-2 text-white rounded rounded-0 fw-bold"
                     >
                       DETAILS <i className="bi bi-arrow-right"></i>
                     </Button>
@@ -427,12 +461,15 @@ const Homepage = () => {
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    <Card.Title>{subs.content[2].title}</Card.Title>€{' '}
                     {subs.content[2].price} - {subs.content[2].daysOfDuration}{' '}
                     Days
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + subs.content[2].id)
+                      }}
                       className="
-              mb-2 text-white rounded rounded-0 fw-bold"
+            mb-2 text-white rounded rounded-0 fw-bold"
                     >
                       DETAILS <i className="bi bi-arrow-right"></i>
                     </Button>
@@ -448,12 +485,15 @@ const Homepage = () => {
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    <Card.Title>{subs.content[3].title}</Card.Title>€{' '}
                     {subs.content[3].price} - {subs.content[3].daysOfDuration}{' '}
                     Days
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + subs.content[3].id)
+                      }}
                       className="
-              mb-2 text-white rounded rounded-0 fw-bold"
+            mb-2 text-white rounded rounded-0 fw-bold"
                     >
                       DETAILS <i className="bi bi-arrow-right"></i>
                     </Button>
@@ -469,12 +509,15 @@ const Homepage = () => {
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub ">
-                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    <Card.Title>{subs.content[4].title}</Card.Title>€{' '}
                     {subs.content[4].price} - {subs.content[4].daysOfDuration}{' '}
                     Days
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + subs.content[4].id)
+                      }}
                       className="
-              mb-2 text-white rounded rounded-0 fw-bold"
+            mb-2 text-white rounded rounded-0 fw-bold"
                     >
                       DETAILS <i className="bi bi-arrow-right"></i>
                     </Button>
@@ -490,12 +533,15 @@ const Homepage = () => {
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Card.Title>{subs.Title}</Card.Title>€{' '}
+                    <Card.Title>{subs.content[5].title}</Card.Title>€{' '}
                     {subs.content[5].price} - {subs.content[5].daysOfDuration}{' '}
                     Days
                     <Button
+                      onClick={() => {
+                        navigate('/details/' + subs.content[5].id)
+                      }}
                       className="
-              mb-2 text-white rounded rounded-0 fw-bold"
+            mb-2 text-white rounded rounded-0 fw-bold"
                     >
                       DETAILS <i className="bi bi-arrow-right"></i>
                     </Button>
@@ -546,7 +592,7 @@ const Homepage = () => {
                       src={trainers[0].avatar}
                       alt="trainer"
                       className="w-50 graytrain"
-                      style={{ minHeight: 370 }}
+                      style={{ minHeight: 340 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
@@ -554,7 +600,7 @@ const Homepage = () => {
                       {trainers[0].name} {trainers[0].surname}
                     </h5>
                     <p className="text-center fw-semibold opacity-50">
-                      Crossfit Trainer
+                      Nutritionist && Cardio Trainer
                     </p>
                   </div>
                 </div>
@@ -566,7 +612,7 @@ const Homepage = () => {
                       src={trainers[1].avatar}
                       alt="trainer"
                       className="w-50 graytrain"
-                      style={{ minHeight: 370 }}
+                      style={{ minHeight: 340 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
@@ -575,7 +621,7 @@ const Homepage = () => {
                       {trainers[1].name} {trainers[1].surname}
                     </h5>
                     <p className="text-center fw-semibold opacity-50">
-                      Crossfit Trainer
+                      Yoga Trainer
                     </p>
                   </div>
                 </div>
@@ -587,7 +633,7 @@ const Homepage = () => {
                       src={trainers[2].avatar}
                       alt="trainer"
                       className="w-50 graytrain"
-                      style={{ minHeight: 370 }}
+                      style={{ minHeight: 340 }}
                     />
                   </div>
                   <div className="underTrainers pt-4 d-flex flex-column justify-content-center align-items-center">
@@ -596,7 +642,7 @@ const Homepage = () => {
                       {trainers[2].name} {trainers[2].surname}
                     </h5>
                     <p className="text-center fw-semibold opacity-50">
-                      Crossfit Trainer
+                      Power Lifting Trainer
                     </p>
                   </div>
                 </div>
@@ -693,8 +739,8 @@ const Homepage = () => {
             REVIEWS
           </h5>
         </div>
-        <Row className="justify-content-center ">
-          <Col xs={12} md={8}>
+        <Row className="justify-content-center">
+          <Col xs={12} md={10} lg={6}>
             <Carousel className="w-100">
               {reviews === null && (
                 <Col className="mt-5 d-flex justify-content-center align-items-center">
@@ -710,13 +756,16 @@ const Homepage = () => {
                           <img
                             src={review.user.avatar}
                             alt="user_avatar"
-                            className="rounded-circle ms-5 mt-3  profileImg"
-                            width={120}
-                            height={120}
+                            className="rounded-circle  ms-4 mt-3  profileImg"
+                            width={90}
+                            height={90}
                           />
-                          <Carousel.Caption>
-                            <h3>{review.title}</h3>
-                            <p>{review.description}</p>
+
+                          <Carousel.Caption className="p-0">
+                            <h3 className="mb-3 fw-bold fst-italic">
+                              {review.title}
+                            </h3>
+                            <p className="fst-italic">{review.description}</p>
                             <p className="mb-0 text-center  mb-4 mb-lg-2">
                               {[1, 2, 3, 4, 5].map((value) => (
                                 <i
@@ -724,7 +773,7 @@ const Homepage = () => {
                                   className={
                                     value <= review.rating
                                       ? 'bi bi-star-fill text-primary  me-1 fs-4 '
-                                      : 'bi bi-star text-primary  fs-4 '
+                                      : 'bi bi-star text-primary fs-4 '
                                   }
                                 ></i>
                               ))}

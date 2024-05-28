@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { POST_SUB_ERRORS, POST_SUB_OK, addSub, getSubs } from '../redux/actions'
+import baffo from '../assets/baffo.svg'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -43,7 +44,7 @@ const Dashboard = () => {
       payload: null,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [initialForm])
 
   const [currentFile, setCurrentFile] = useState(null)
 
@@ -85,10 +86,20 @@ const Dashboard = () => {
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold my-5"> ADMIN DASHBOARD </h1>
+        <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
+          <img
+            src={baffo}
+            alt="baffo"
+            className="position-absolute "
+            width={560}
+          />
+          <h1 className="fw-bold pt-4 mb-5 mt-xl-0 z-2 position-relative pt-3">
+            ADMIN DASHBOARD
+          </h1>
+        </div>
         <hr />
         <Row>
-          <h3 className="text-center fw-bold">Actives Subscriptions</h3>
+          <h3 className="text-center fw-bold">Active Subscriptions</h3>
           <h6 className="text-center fw-bold fst-italic ">
             Click on the subscription to change the image, then press Submit
           </h6>
@@ -118,7 +129,6 @@ const Dashboard = () => {
                             <Card.Text>
                               € {sub.price} - {sub.daysOfDuration} days
                             </Card.Text>
-                            <Card.Text>{sub.description}</Card.Text>
                           </Card.ImgOverlay>
                         </Card>
                       </Form.Label>
@@ -179,7 +189,7 @@ const Dashboard = () => {
       </Row>
       <hr />
       <Row>
-        <h3 className="text-center fw-bold mt-5">Create Subscription</h3>
+        <h3 className="text-center fw-bold mt-5">Create a Subscription</h3>
       </Row>
       <Row className="justify-content-center my-5">
         <Col xs={10} md={6} lg={4} className="formGrap p-5 mb-5 ">
@@ -212,6 +222,7 @@ const Dashboard = () => {
                 Description
               </Form.Label>
               <Form.Control
+                as="textarea"
                 type="text"
                 placeholder="Sub Description"
                 className="rounded-0"
@@ -250,7 +261,7 @@ const Dashboard = () => {
             </Form.Group>
 
             <Row className="justify-content-center">
-              <Col xs={4}>
+              <Col xs={4} md={5} xl={4}>
                 <Button
                   variant="primary"
                   type="submit"

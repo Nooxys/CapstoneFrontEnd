@@ -1,11 +1,18 @@
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
-import athlete from '../assets/athlete_celebrating.png'
 import photo1 from '../assets/compress-strong-man-training-gym-min-scaled.webp'
 import photo2 from '../assets/reunion.webp'
 import { Link } from 'react-router-dom'
 import baffo from '../assets/baffo.svg'
+import { useEffect } from 'react'
+import couple from '../assets/about_us.png'
+import redCircle from '../assets/red-circle.svg'
 
 const AboutUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Container className="mb-5">
       <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
@@ -21,8 +28,8 @@ const AboutUs = () => {
       </div>
       <hr />
 
-      <Row className="justify-content-center justify-content-md-around my-4">
-        <Col xs={10} md={6}>
+      <Row className="justify-content-center justify-content-md-around  my-4 rowAboutUs  ">
+        <Col xs={12} lg={6}>
           <h4 className="fw-bold mb-4 text-center text-md-start  mt-lg-5 mt-xl-0">
             NOCTFIT
           </h4>
@@ -35,13 +42,28 @@ const AboutUs = () => {
             routes and nutritions plans. Our customers confirm it!
           </p>
           <Link to={'/contacts'}>
-            <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton ">
+            <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton mb-5">
               CONTACT US <i className="bi bi-arrow-right"></i>
             </Button>
           </Link>
         </Col>
-        <Col xs={10} md={5} className="d-none d-md-block mb-5">
-          <img src={athlete} alt="athlete_celebrating" width={350} />
+        <Col
+          xs={10}
+          md={5}
+          className="d-none d-lg-block mb-5 position-relative"
+        >
+          <img
+            src={couple}
+            alt="athlete_celebrating "
+            width={260}
+            className="position-absolute z-3 aboutUsImage"
+          />
+          <img
+            src={redCircle}
+            alt="red circle"
+            width={210}
+            className="z-2 redCircleAbout position-absolute"
+          />
         </Col>
       </Row>
       <hr className="pt-5" />
@@ -54,7 +76,7 @@ const AboutUs = () => {
         <Col xs={12} xl={6}>
           <Card className=" h-100 rounded-0">
             <Card.Text>
-              <p className="text-center  mt-5 pt-5 pt-lg-2">
+              <p className="text-center  mt-5  pt-lg-4">
                 <i className="bi bi-clock-history text-primary fw-bold display-1  "></i>
               </p>
               <h2 className="text-center fw-bold pt-4  pt-xl-0">Our History</h2>
@@ -72,7 +94,7 @@ const AboutUs = () => {
         <Col xs={12} xl={6}>
           <Card className=" h-100 rounded-0">
             <Card.Text>
-              <p className="text-center  mt-5 pt-5 pt-lg-2">
+              <p className="text-center  mt-5  pt-lg-4">
                 <i className="bi bi-calendar-check text-primary fw-bold display-1  "></i>
               </p>
               <h2 className="text-center fw-bold pt-4  pt-xl-0">

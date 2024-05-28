@@ -91,7 +91,7 @@ const ChangePassword = () => {
                 {passwordOk && (
                   <div className=" text-center text-white">
                     {passwordOk} Go Back to
-                    <Link className="text-decoration-none" to="/login">
+                    <Link className="text-decoration-none" to="/profile">
                       <span className="text-primary fw-bold hoverable ms-2">
                         My profile
                       </span>

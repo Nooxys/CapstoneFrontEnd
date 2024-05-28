@@ -4,9 +4,19 @@ import Navbar from 'react-bootstrap/Navbar'
 import logo from '../assets/NOCTFIT_final.png'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import {
+  Button,
+  Offcanvas,
+  OverlayTrigger,
+  Popover,
+  Toast,
+} from 'react-bootstrap'
+import { useState } from 'react'
 
 function CustomNavbar() {
   const location = useLocation().pathname
+  const [showA, setShowA] = useState(true)
+  const toggleShowA = () => setShowA(!showA)
 
   const token = useSelector((state) => state.authReducer.accessToken)
   const role = useSelector((state) => state.userReducer.role)

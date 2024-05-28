@@ -3,9 +3,12 @@ import { Container, Row, Col, Accordion, Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   POST_RESERVATION_ERRORS,
+  POST_REVIEW_ERRORS,
   POST_REVIEW_OK,
   addReview,
 } from '../redux/actions'
+import baffo from '../assets/baffo.svg'
+import { Link } from 'react-router-dom'
 
 const Contact = () => {
   const initialForm = {
@@ -36,7 +39,7 @@ const Contact = () => {
       data: false,
     })
     dispatch({
-      type: POST_RESERVATION_ERRORS,
+      type: POST_REVIEW_ERRORS,
       data: null,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +49,17 @@ const Contact = () => {
     <>
       <Container className="mb-5">
         <Row>
-          <h1 className="text-center fw-bold my-5"> CONTACT US</h1>
+          <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
+            <img
+              src={baffo}
+              alt="baffo"
+              className="position-absolute mt-2"
+              width={400}
+            />
+            <h1 className="fw-bold   mb-4 mt-xl-0 z-2 position-relative pt-3">
+              CONTACT US
+            </h1>
+          </div>
           <hr />
         </Row>
         <Row className="mb-5">
@@ -76,8 +89,9 @@ const Contact = () => {
                 <h4 className="fw-bold border-bottom border-primary border-3 pb-1 text-center text-lg-start ">
                   Information
                 </h4>
-                <div className="d-flex justify-content-center justify-content-lg-start    align-items-center  h-100">
-                  <p className="px-2 pb-3  ">+39 0541 0110101</p>
+                <div className="d-flex flex-column justify-content-center    align-items-lg-start  align-items-center  mt-4 mb-3">
+                  <p className="m-0">+39 0541 0110101</p>
+                  <p>Noctfit@Noctfit.com</p>
                 </div>
               </Col>
               <Col xs={12} lg={6}>
@@ -88,7 +102,6 @@ const Contact = () => {
                   <p className="px-2 pb-3   ">
                     <span className="d-block">Piazza Garibaldi,</span>
                     <span className="d-block">Via Roma, 07</span>
-                    <span className="d-block">Noctfit@Noctfit.com</span>
                   </p>
                 </div>
               </Col>
@@ -98,10 +111,18 @@ const Contact = () => {
                 </h4>
                 <br />
                 <div className="d-flex justify-content-start   align-items-center justify-content-center justify-content-lg-start ">
-                  <i className="bi bi-facebook display-6 mx-2 "></i>
-                  <i className="bi bi-instagram display-6  mx-2"></i>
-                  <i className="bi bi-twitter-x display-6  mx-2"></i>
-                  <i className="bi bi-youtube display-6 mx-2"></i>
+                  <a href="https://www.facebook.com/" className="text-black">
+                    <i className="bi bi-facebook display-6 mx-2 "></i>{' '}
+                  </a>
+                  <a href="https://www.instagram.com/" className="text-black">
+                    <i className="bi bi-instagram display-6  mx-2"></i>
+                  </a>
+                  <a href="https://www.twitter.com/" className="text-black">
+                    <i className="bi bi-twitter-x display-6  mx-2"></i>
+                  </a>
+                  <a href="https://www.youtube.com/" className="text-black">
+                    <i className="bi bi-youtube display-6 mx-2"></i>
+                  </a>
                 </div>
               </Col>
             </Row>
@@ -217,7 +238,7 @@ const Contact = () => {
                     ></i>
                   ))}
                 </Form.Group>
-                {!newReview && (
+                {!newReview && token !== '' && (
                   <Button
                     type="submit"
                     variant="primary"
@@ -227,13 +248,24 @@ const Contact = () => {
                     SEND
                   </Button>
                 )}
+                {!newReview && token === '' && (
+                  <p className="opacity-75">
+                    <Link
+                      className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1 fw-bold"
+                      to="/login"
+                    >
+                      Login
+                    </Link>{' '}
+                    to send a review!
+                  </p>
+                )}
 
                 {newReview && (
                   <div className="mb-3 text-center text-white">
                     Review sent!
                   </div>
                 )}
-                {newReviewErrors && (
+                {newReviewErrors !== null && (
                   <div className="text-primary my-3">{newReviewErrors}</div>
                 )}
               </Form>

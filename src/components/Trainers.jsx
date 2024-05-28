@@ -16,6 +16,7 @@ import {
   getTrainers,
 } from '../redux/actions'
 import baffo from '../assets/baffo.svg'
+import { Link } from 'react-router-dom'
 
 const Trainers = () => {
   // ------------------
@@ -100,8 +101,8 @@ const Trainers = () => {
       <Row className="mb-5">
         <h2 className="fw-bold   text-center">Discover Our Professionals!</h2>
         <p className="text-center">
-          Our personal trainers are all qualified, they will help you achieve
-          any goal with specific workouts and targeted diets.
+          Our personal trainers are qualified, they will help you achieve any
+          goal with specific workouts and targeted diets.
         </p>
       </Row>
       <Row>
@@ -111,7 +112,7 @@ const Trainers = () => {
           </Col>
         )}
         {trainers !== null &&
-          trainers.map((trainer) => {
+          trainers.map((trainer, i) => {
             return (
               <Col xs={12} md={6} xl={4} key={trainer.id} className="mb-4">
                 <div className="trainers">
@@ -128,21 +129,38 @@ const Trainers = () => {
                       {trainer.name} {trainer.surname}
                     </h5>
                     <p className="text-center fw-semibold opacity-50">
-                      Crossfit Trainer
+                      {i === 0 && 'Nutritionist && Cardio Trainer'}
+                      {i === 1 && 'Yoga Trainer'}
+                      {i === 2 && 'Power Lifting Trainer'}
+                      {i === 3 && 'Crossfit Trainer'}
+                      {i === 4 && 'Aerobics Trainer'}
                     </p>
-                    <Button
-                      className="
+                    {token === '' && (
+                      <p className="opacity-75">
+                        <Link
+                          className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1 fw-bold"
+                          to="/login"
+                        >
+                          Login
+                        </Link>{' '}
+                        to book {trainer.name}
+                      </p>
+                    )}
+                    {token !== '' && (
+                      <Button
+                        className="
                 mb-3 text-white rounded rounded-0 fw-bold"
-                      onClick={() => {
-                        handleShow()
-                        setPostForm({
-                          ...postForm,
-                          ptId: trainer.id,
-                        })
-                      }}
-                    >
-                      BOOK
-                    </Button>
+                        onClick={() => {
+                          handleShow()
+                          setPostForm({
+                            ...postForm,
+                            ptId: trainer.id,
+                          })
+                        }}
+                      >
+                        BOOK
+                      </Button>
+                    )}
                   </div>
                 </div>
               </Col>

@@ -1,5 +1,5 @@
 import { Button, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {
@@ -51,26 +51,101 @@ const SubDetails = () => {
                     className="homeSub"
                   />
                   <Card.ImgOverlay className="d-flex flex-column align-items-start justify-content-end text-white homeSub">
-                    <Button
-                      onClick={() => {
-                        dispatch(assignSub(token, param))
-                      }}
-                      className="
+                    {token !== '' && (
+                      <Button
+                        onClick={() => {
+                          dispatch(assignSub(token, param))
+                        }}
+                        className="
               mb-2 text-white rounded rounded-0 fw-bold"
-                    >
-                      ADD TO CART <i className="bi bi-arrow-right"></i>
-                    </Button>
+                      >
+                        ADD TO PROFILE
+                      </Button>
+                    )}
+                    {token === '' && (
+                      <Link to={'/login'}>
+                        <Button
+                          className="
+              mb-2 text-white rounded rounded-0 fw-bold"
+                        >
+                          LOGIN
+                        </Button>
+                      </Link>
+                    )}
+                    {assignOK === true ? (
+                      <p className="fw-bold "> Sub added to profile!</p>
+                    ) : (
+                      <p className="fw-bold"> {assignErrors}</p>
+                    )}
                   </Card.ImgOverlay>
                 </Card>
+                <p className="text-center  pt-2">
+                  <i className="bi bi-arrow-left"></i> Go Back To
+                  <Link
+                    className="text-primary link-offset-2 link-underline link-underline-opacity-0 ms-1 fw-bold"
+                    to="/subscriptions"
+                  >
+                    Subscriptions
+                  </Link>
+                </p>
               </Col>
-              <Col xs={4} lg={6}>
-                <div className="border border-3 border-primary ">
-                  <h3 className=" p-3 text-center">{sub.title}</h3>
-                  <h6>prezzo</h6>
-                  <h6>durata</h6>
-
-                  <h3 className=" p-3 text-center">Description</h3>
-                  <p className=" p-3">{sub.description}</p>
+              <Col
+                xs={12}
+                lg={6}
+                className="d-flex flex-column justify-content-around"
+              >
+                <hr className="d-lg-none mt-5 mt-lg-0" />
+                <div>
+                  <Row className="justify-content-start align-items-center">
+                    <Col xs={2} className="mb-2">
+                      <i className="bi bi-feather text-primary display-5"></i>
+                    </Col>
+                    <Col
+                      xs={8}
+                      className="border-bottom border-2 border-primary text-center"
+                    >
+                      {' '}
+                      <h2>{sub.title}</h2>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-start align-items-center">
+                    <Col xs={2} className="mb-2">
+                      <i className="bi bi-clock-history text-primary display-5"></i>
+                    </Col>
+                    <Col
+                      xs={8}
+                      className="border-bottom border-2 border-primary text-center"
+                    >
+                      {' '}
+                      <h2>{sub.daysOfDuration} Days of Subsription</h2>
+                    </Col>
+                  </Row>
+                  <Row className="justify-content-start align-items-center">
+                    <Col xs={2} className="mb-2">
+                      <i className="bi bi-tags text-primary display-5"></i>
+                    </Col>
+                    <Col
+                      xs={8}
+                      className="border-bottom border-2 border-primary text-center"
+                    >
+                      {' '}
+                      <h2>{sub.price} €</h2>
+                    </Col>
+                  </Row>
+                </div>
+                <div>
+                  <Row className="justify-content-start align-items-center">
+                    <Col xs={2} className="mb-2 ">
+                      <i className="bi bi-book text-primary display-5"></i>
+                    </Col>
+                    <Col
+                      xs={8}
+                      className="border-bottom border-2 border-primary text-center"
+                    >
+                      {' '}
+                      <h5>{sub.description}</h5>
+                    </Col>
+                  </Row>
                 </div>
               </Col>
             </>

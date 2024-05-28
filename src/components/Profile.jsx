@@ -1,4 +1,13 @@
-import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
+import {
+  Button,
+  Col,
+  Container,
+  Dropdown,
+  DropdownButton,
+  Form,
+  Row,
+  Spinner,
+} from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +19,7 @@ import {
   getMyReviews,
   getMySubs,
 } from '../redux/actions'
+import baffo from '../assets/baffo.svg'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -99,17 +109,29 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     dispatch(getMe(accessToken))
     dispatch(getMyReservations(accessToken))
     dispatch(getMySubs(accessToken))
     dispatch(getMyReviews(accessToken))
+    dispatch(getMyReservations(accessToken))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <Container className="mb-5">
       <Row>
-        <h1 className="text-center fw-bold my-5"> MY PROFILE</h1>
+        <div className="position-relative z-3 d-flex justify-content-center my-4 text-white">
+          <img
+            src={baffo}
+            alt="baffo"
+            className="position-absolute mt-2"
+            width={400}
+          />
+          <h1 className="fw-bold   mb-4 mt-xl-0 z-2 position-relative pt-3">
+            MY PROFILE
+          </h1>
+        </div>
         <hr />
       </Row>
       {user === null && (
@@ -131,7 +153,59 @@ const Profile = () => {
                 width={80}
                 height={80}
               />
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="primary"
+                  className="text-white rounded-0 mb-3 fw-bold"
+                  id="dropdown-basic"
+                >
+                  Settings
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
+                    {' '}
+                    <Link
+                      className=" text-black link-underline link-underline-opacity-0"
+                      to={'/update'}
+                    >
+                      <p className="fw-bold  my-1">update info</p>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">
+                    <Link
+                      className="text-black link-underline link-underline-opacity-0"
+                      to={'/password'}
+                    >
+                      <p className="fw-bold  my-1">change password</p>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">
+                    <Link
+                      className="text-black link-underline link-underline-opacity-0"
+                      to={'/login'}
+                    >
+                      <p
+                        onClick={() => {
+                          dispatch({
+                            type: ACCESS_TOKEN,
+                            payload: '',
+                          })
+                          dispatch({
+                            type: GET_ROLE,
+                            payload: null,
+                          })
+                        }}
+                        className="fw-bold  mb-3"
+                      >
+                        LOGOUT <i className="bi bi-person-down"></i>
+                      </p>
+                    </Link>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </h2>
+
             <h4 className="fw-bold mb-4 text-center text-md-start  mt-xl-0">
               Your Info:
             </h4>
@@ -152,14 +226,15 @@ const Profile = () => {
                 <p>*******</p>
                 <p>{user.birthDate}</p>
               </Col>
+
               <Form
                 onSubmit={(e) => {
                   handleSubmit(e)
                 }}
               >
                 <Form.Group controlId="formFileSm" className="2">
-                  <Form.Label className="fw-bold revRating mb-1 mt-5">
-                    change avatar
+                  <Form.Label className="fw-bold revRating fst-italic mb-1">
+                    - change avatar -
                   </Form.Label>
                   <Form.Control
                     type="file"
@@ -175,50 +250,15 @@ const Profile = () => {
                   type="submit"
                 >
                   {' '}
-                  Change
+                  Upload
                 </Button>
               </Form>
-              <Col xs={12} md={3}>
-                <Link
-                  className=" text-black link-underline link-underline-opacity-0"
-                  to={'/update'}
-                >
-                  <p className="fw-bold  my-1">update info</p>
-                </Link>
-
-                <Link
-                  className="text-black link-underline link-underline-opacity-0"
-                  to={'/password'}
-                >
-                  <p className="fw-bold  my-1">change password</p>
-                </Link>
-                <Link
-                  className="text-black link-underline link-underline-opacity-0"
-                  to={'/login'}
-                >
-                  <p
-                    onClick={() => {
-                      dispatch({
-                        type: ACCESS_TOKEN,
-                        payload: '',
-                      })
-                      dispatch({
-                        type: GET_ROLE,
-                        payload: null,
-                      })
-                    }}
-                    className="fw-bold  mb-3"
-                  >
-                    LOGOUT <i className="bi bi-person-down"></i>
-                  </p>
-                </Link>
-              </Col>
             </Row>
           </Col>
           <hr className="d-lg-none" />
 
-          <Col xs={12} lg={6} xl={4} className="text-center mt-4 mt-lg-5 ">
-            <h2 className="text-center fw-bold mb-5">
+          <Col xs={12} lg={6} xl={4} className="text-center mt-1 mt-lg-5 ">
+            <h2 className="text-center fw-bold mb-5 mt-5">
               {' '}
               Calculate your <span className="text-primary">BMI</span>!
             </h2>
@@ -275,6 +315,7 @@ const Profile = () => {
               </Form.Group>
             </Form>
           </Col>
+
           <hr />
           <Col
             xs={12}
@@ -361,7 +402,7 @@ const Profile = () => {
                       <p className="fw-bold mb-0 text-center text-md-start">
                         {sub.title}
                       </p>
-                      <p className=" mb-0 text-center text-md-start mb-4 mb-lg-0">
+                      <p className=" mb-0 text-center text-md-start mb-2">
                         validity:{' '}
                         <span className="fw-bold">{sub.daysOfDuration} </span>
                         days
@@ -380,7 +421,7 @@ const Profile = () => {
               Your Reservations:
             </h2>
             {myReservations !== null &&
-              myReservations.content.map((reservation) => {
+              myReservations.map((reservation) => {
                 return (
                   <div
                     key={reservation.id}
