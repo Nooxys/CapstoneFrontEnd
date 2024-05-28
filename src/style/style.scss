@@ -1,15 +1,59 @@
 // COLORS
 
-// $primary: red;
+$primary: #ff0336;
+$info: #f6e7d8;
+$danger: #1e1e1e;
+$offwhite: darken(white, 10%);
+$darkblue: rgb(50, 50, 60);
 
+$position-values: (
+  0: 0,
+  15: 15%,
+  20: 20%,
+  25: 25%,
+  35: 35%,
+  50: 50%,
+  65: 65%,
+  75: 75%,
+  90: 90%,
+  100: 100%,
+);
 // CSS
 
 // PER IL FOOTER A BORDO PAGINA, AGIGUNGERE ANCHE FLEX-GROW-1 AL MAIN
-// html,
-// body,
-// #root {
-//   height: 100%;
-// }
+
+html,
+body,
+#root {
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  // font-family: 'Montserrat';
+  // src: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+}
+
+.formGrap {
+  background-color: rgb(19, 18, 18);
+  // box-shadow: 1px 0px 8px 5px #545453;
+}
+
+hr {
+  height: 40px;
+  color: black;
+}
+.pageBody {
+  background-color: #f8f8f8;
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+}
+
 .navBack {
   background-color: #1e1e1e;
 }
@@ -47,6 +91,152 @@ footer {
 
 #footerbutton {
   border-color: #838383;
+}
+
+.trainers {
+  background-image: url('../assets/trainer-bg.d8a91ceec330444b6dfd.png');
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 97%;
+}
+
+.underTrainers {
+  background-color: #f8f8f8;
+  box-shadow: 1px 4px 11px 0px #b5b5b5;
+}
+
+.subscriptions {
+  background-color: #0000004a;
+  object-fit: cover;
+}
+
+.homeSub {
+  background-color: #0000004a;
+  object-fit: cover;
+}
+
+.graytrain {
+  filter: grayscale(1);
+
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+
+.graytrain:hover {
+  filter: grayscale(0);
+}
+
+.hero {
+  background-image: url('../assets/pexels-anush-1229356.jpg');
+  background-position-y: 25%;
+
+  height: 110vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 110%;
+}
+
+.heroPng {
+  background-color: rgb(43, 43, 43);
+  transition: ease-in cubic-bezier(0.4, 0, 1, 1);
+  transition-duration: 0.2s;
+}
+
+.heroPng:hover {
+  background-color: $primary;
+}
+
+.col-homepage {
+  height: 80px;
+}
+
+.calculate-section {
+  background-image: url('../assets//confident-sportswoman-with-dumbbell-dark.jpg');
+  height: 80vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  background-position-y: 60%;
+  color: white;
+  form,
+  input,
+  label {
+    color: white !important;
+  }
+  .form-control::placeholder {
+    color: white;
+  }
+}
+
+.divreview {
+  background-color: black;
+  height: 22rem;
+  width: 100%;
+  overflow-x: clip;
+  opacity: 1;
+  position: relative;
+}
+
+.divouterrew {
+  border-color: rgb(239, 239, 239) !important;
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  border: solid;
+  border-width: 6px;
+}
+
+.revRating {
+  cursor: pointer;
+}
+
+.profileImg {
+  object-fit: cover;
+}
+
+.redCircle {
+  left: 180px;
+  bottom: -30px;
+}
+.redCircleSubs {
+  left: 215px;
+  top: -12px;
+  bottom: -11px;
+}
+
+.rowAboutUs {
+  height: 45vh;
+}
+
+.aboutUsImage {
+  bottom: -56px;
+}
+
+.redCircleAbout {
+  left: 153px;
+  top: -10px;
+  bottom: 5px;
+}
+
+.whiteCircle {
+  left: -78px;
+  bottom: -20px;
+  filter: brightness(0) invert(1);
+  transform: rotate(180deg);
+}
+
+.baffoHero {
+  background-image: url('../assets/baffo.svg');
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 53px;
+  width: 350px;
+}
+
+.whiteBaffo {
+  filter: brightness(0) invert(1);
 }
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

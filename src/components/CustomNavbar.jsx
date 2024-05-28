@@ -1,11 +1,26 @@
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import logo from '../assets/NOCTFITSTATIC.png'
+import logo from '../assets/NOCTFIT_final.png'
 import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import {
+  Button,
+  Offcanvas,
+  OverlayTrigger,
+  Popover,
+  Toast,
+} from 'react-bootstrap'
+import { useState } from 'react'
 
 function CustomNavbar() {
   const location = useLocation().pathname
+  const [showA, setShowA] = useState(true)
+  const toggleShowA = () => setShowA(!showA)
+
+  const token = useSelector((state) => state.authReducer.accessToken)
+  const role = useSelector((state) => state.userReducer.role)
+
   return (
     <Navbar
       collapseOnSelect
@@ -14,11 +29,14 @@ function CustomNavbar() {
       data-bs-theme="dark"
       bg="dark"
     >
-      <Container fluid className="navBack">
+      <Container
+        fluid
+        className="navBack p-0 border-3 border-bottom border-primary "
+      >
         <Link
           className={
             location === '/'
-              ? 'nav-link active d-lg-none '
+              ? 'nav-link active d-lg-none'
               : 'nav-link d-lg-none '
           }
           to="/"
@@ -27,7 +45,7 @@ function CustomNavbar() {
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto me-auto d-flex align-items-md-center ">
+          <Nav className="ms-auto me-auto d-flex align-items-lg-center ps-3 ps-lg-0 ">
             <Link
               className={location === '/' ? 'nav-link active' : 'nav-link'}
               to="/"
@@ -38,17 +56,15 @@ function CustomNavbar() {
               className={
                 location === '/subscriptions' ? 'nav-link active ' : 'nav-link'
               }
-              to="/"
+              to="/subscriptions"
             >
               SUBSCRIPTIONS
             </Link>
             <Link
               className={
-                location === '/personalTrainers'
-                  ? 'nav-link active '
-                  : 'nav-link'
+                location === '/trainers' ? 'nav-link active ' : 'nav-link'
               }
-              to="/"
+              to="/trainers"
             >
               TRAINERS
             </Link>
@@ -62,18 +78,45 @@ function CustomNavbar() {
             >
               <img src={logo} width={300} alt="logo" />
             </Link>
-            <Link className="nav-link" to="/">
+            <Link
+              className={
+                location === '/about' ? 'nav-link active ' : 'nav-link'
+              }
+              to="/about"
+            >
               ABOUT US
             </Link>
-            <Link className="nav-link" to="/">
-              CONTACTS
+            <Link
+              className={
+                location === '/contacts' ? 'nav-link active ' : 'nav-link'
+              }
+              to="/contacts"
+            >
+              CONTACT
             </Link>
             <Link
-              className={location === '/login' ? 'nav-link active' : 'nav-link'}
-              to="/login"
+              className={
+                location === '/login' ||
+                location === '/register' ||
+                location === '/profile'
+                  ? 'nav-link active '
+                  : 'nav-link '
+              }
+              to={token !== '' ? '/profile' : '/login'}
             >
-              <i className="bi bi-person-up"></i> LOGIN
+              <i className="bi bi-person-up me-1"></i>
+              {token !== '' ? 'PROFILE' : 'LOGIN'}
             </Link>
+            {role === 'ADMIN' && (
+              <Link
+                className={
+                  location === '/dashboard' ? 'nav-link active' : 'nav-link '
+                }
+                to="/dashboard"
+              >
+                ADMIN
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
