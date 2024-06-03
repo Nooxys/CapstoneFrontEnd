@@ -55,7 +55,8 @@ const Dashboard = () => {
       formData.append('cover', currentFile)
       try {
         const response = await fetch(
-          'http://localhost:3001/subscriptions/upload/' + id,
+          'https://capstonebackend-rtim.onrender.com/subscriptions/upload/' +
+            id,
           {
             method: 'POST',
             headers: {
@@ -158,9 +159,9 @@ const Dashboard = () => {
                             try {
                               const response = await fetch(
                                 `
-                    http://localhost:3001/subscriptions/${
-                      e.target.closest('div').id
-                    }`,
+                                https://capstonebackend-rtim.onrender.com/subscriptions/${
+                                  e.target.closest('div').id
+                                }`,
                                 {
                                   method: 'DELETE',
                                   headers: {

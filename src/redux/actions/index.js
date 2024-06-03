@@ -1,7 +1,7 @@
 // ACTION REFERENCES -------------------------------------------------------------------------------------------------------
 
 // export const EXAMPLE_1 = "EXAMPLE_1"
-const startingURL = 'http://localhost:3001'
+const startingURL = 'https://capstonebackend-rtim.onrender.com'
 
 export const ACCESS_TOKEN = 'ACCESS_TOKEN'
 export const LOGIN_ERRORS = 'LOGIN_ERRORS'

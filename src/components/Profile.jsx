@@ -355,9 +355,9 @@ const Profile = () => {
                           try {
                             const response = await fetch(
                               `
-                    http://localhost:3001/reviews/${
-                      e.target.closest('div').id
-                    }`,
+                              https://capstonebackend-rtim.onrender.com/reviews/${
+                                e.target.closest('div').id
+                              }`,
                               {
                                 method: 'DELETE',
                                 headers: {
@@ -443,9 +443,9 @@ const Profile = () => {
                         try {
                           const response = await fetch(
                             `
-                    http://localhost:3001/reservations/${
-                      e.target.closest('div').id
-                    }`,
+                            https://capstonebackend-rtim.onrender.com/reservations/${
+                              e.target.closest('div').id
+                            }`,
                             {
                               method: 'DELETE',
                               headers: {
