@@ -35,13 +35,16 @@ const Profile = () => {
       const formData = new FormData()
       formData.append('avatar', currentFile)
       try {
-        const response = await fetch('http://localhost:3001/users/me/upload', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: formData,
-        })
+        const response = await fetch(
+          'https://capstonebackend-rtim.onrender.com/users/me/upload',
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: formData,
+          }
+        )
         if (response.ok) {
           console.log('uploaded')
         }
