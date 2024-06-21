@@ -184,7 +184,7 @@ footer {
 }
 
 .rowAboutUs {
-  height: 45vh;
+  height: 55vh;
 }
 
 .aboutUsImage {
@@ -192,9 +192,9 @@ footer {
 }
 
 .redCircleAbout {
-  left: 153px;
-  top: -10px;
-  bottom: 5px;
+  left: 165px;
+  top: -8px;
+  bottom: -11px;
 }
 
 .whiteCircle {

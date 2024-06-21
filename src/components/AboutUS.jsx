@@ -27,10 +27,9 @@ const AboutUs = () => {
         </h1>
       </div>
       <hr />
-
-      <Row className="justify-content-center justify-content-md-around  my-4 rowAboutUs  ">
-        <Col xs={12} lg={6}>
-          <h4 className="fw-bold mb-4 text-center text-md-start  mt-lg-5 mt-xl-0">
+      <Row className="justify-content-center justify-content-md-around  rowAboutUs ">
+        <Col xs={10} lg={6}>
+          <h4 className="fw-bold mb-4 text-center text-md-start mt-lg-2  ">
             NOCTFIT
           </h4>
           <h2 className="fw-bold mb-4  text-center text-md-start">
@@ -41,8 +40,17 @@ const AboutUs = () => {
             to achieve goals never achieved before, with personalized fitness
             routes and nutritions plans. Our customers confirm it!
           </p>
+          <h4 className="fw-bold mb-4 text-center text-md-start mt-5 mt-xl-0">
+            Our Key To Success
+          </h4>
+          <p className=" mb-5 opacity-75 ">
+            We have modern, safe and efficient equipment available, furthermore,
+            you will always have a united community available to help you, at
+            any time! Contact us for further information!
+          </p>
+
           <Link to={'/contacts'}>
-            <Button className="text-white rounded-0 fw-bold py-3 px-4 customButton mb-5">
+            <Button className="text-white rounded-0 fw-bold py-3 px-4 mb-4 customButton ">
               CONTACT US <i className="bi bi-arrow-right"></i>
             </Button>
           </Link>
@@ -50,19 +58,19 @@ const AboutUs = () => {
         <Col
           xs={10}
           md={5}
-          className="d-none d-lg-block mb-5 position-relative"
+          className="d-none d-lg-block mb-5 position-relative "
         >
           <img
             src={couple}
             alt="athlete_celebrating "
-            width={260}
-            className="position-absolute z-3 aboutUsImage"
+            width={300}
+            className="position-absolute z-3"
           />
           <img
             src={redCircle}
             alt="red circle"
-            width={210}
-            className="z-2 redCircleAbout position-absolute"
+            width={250}
+            className="z-1 redCircleAbout position-absolute "
           />
         </Col>
       </Row>
