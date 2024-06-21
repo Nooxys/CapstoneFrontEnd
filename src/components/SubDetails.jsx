@@ -117,7 +117,7 @@ const SubDetails = () => {
                       className="border-bottom border-2 border-primary text-center"
                     >
                       {' '}
-                      <h2>{sub.daysOfDuration} Days of Subsription</h2>
+                      <h2>{sub.daysOfDuration} Days of Subscription</h2>
                     </Col>
                   </Row>
                   <Row className="justify-content-start align-items-center">
