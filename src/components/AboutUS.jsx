@@ -50,7 +50,7 @@ const AboutUs = () => {
           </p>
 
           <Link to={'/contacts'}>
-            <Button className="text-white rounded-0 fw-bold py-3 px-4 mb-4 customButton ">
+            <Button className="text-white rounded-0 fw-bold py-3 px-4 mb-5 customButton ">
               CONTACT US <i className="bi bi-arrow-right"></i>
             </Button>
           </Link>
@@ -62,7 +62,7 @@ const AboutUs = () => {
         >
           <img
             src={couple}
-            alt="athlete_celebrating "
+            alt="couple "
             width={300}
             className="position-absolute z-3"
           />
